@@ -30,11 +30,11 @@ theta = linspace(lo,hi,lim);
 % Compute Fisher information of received parity bits.
 
 % Group size
-b = 5;
+b = 2;
 % Level
-li = 4;
+li = 6;
 % Number of non-zero bits
-n = 500;
+n = 100;
 % Packet size in bits (the population in sampling terminology)
 N = 1000;
 
@@ -81,11 +81,11 @@ comb = zeros(1,b+1);
 %% Compute bit sampling probabilities
 %  sampling with replacement 
 p = n/N;
-p1(1) = (1+(1-2*p)^li)/2; % case input is 0, 1
-p1(2) = 1-p1(1);
 L = 2^(b*li);
-% sampling without replacement
 G = b*li;  % number of bits sampled from N
+B = 2^b;
+
+% sampling without replacement (need to find better way of calculating)
 for j=0:G
     comb(j+1) = nchoosek(G,j);
 end
@@ -93,22 +93,27 @@ h = hygepdf(0:G,N,n,G)./comb;
 
 % case input is (0,0,...,0),(0,0,...,1),...,(1,1,...,1) in that order
 pin2 = h(sum(de2bi(0:(L-1)),2)+1);  % probability of all input sequences
-% pin2 = reshape(pin2,b,L/b);
 
-% p2 = pin2;
-table = zeros(1,L);
-for i=0:(L-1)
-    table(i+1) = bi2de(selfxor(i,G,b));
-end
-% 
-p2 = zeros(1,b);
-B = 2^b;
-for i=0:(B-1)
-    p2(i+1) = sum(pin2(table == i));
-end
-% compute what goes through the channel (there should be b parity bits)
-% and 2^b possible sequences after XORing li bits at a time
 
+% need to find the XOR differences between pairs of sequences (transmitter
+% vs receiver sequences parity calculations)
+%
+% note: doing this in C might be much faster, Matlab bad at bit operations
+% and loops
+%
+% tic
+% table = zeros(L,L);
+% for i=1:L
+%     for j=1:L
+%         v = bi2de(xor(de2bi(i-1,L),de2bi(j-1,L)));
+%         table(i,j) = bi2de(selfxor(v,G,b));
+%     end
+% end
+% toc
+
+tic
+table = generate_table(li,b);
+toc
 
 tic
 Td1 = [-1 1; 1 -1];
@@ -116,31 +121,23 @@ for i=1:lim
     %% Fisher information: sampling with replacement 
     t = [1-theta(i) theta(i)];
 
-    % in both cases matrix circular
-    f1 = cconv(p1,t,2);         
-    fd1 = cconv(p2,[-1 1],2);
-
-    FIwr_bit = sum(fd1.^2./f1);
-    % since i.i.d., so multiply with subsketch size
-    FIwr_total(i) = b*FIwr_bit;  
-
     %% Fisher information: sampling without replacement
     T1 = toeplitz(t',t);
     T2 = T1;
-    for k=1:(b-1)
+    for k=1:(G-1)
         T2 = kron(T2,T1);
     end   
-
-    f2 = p2*T2;
+    T2 = diag(pin2)*T2;
+    
     % calculating differential w.r.t. theta
-    Td2 = zeros(B,B);
-    for j=1:b
+    Td2 = zeros(L,L);
+    for j=1:G
         if (j==1)
             P = Td1;
         else
             P = T1;
         end
-        for k=2:b
+        for k=2:G
             if (j==k)
                 P = kron(P,Td1);
             else
@@ -149,8 +146,27 @@ for i=1:lim
         end
         Td2 = Td2 + P;
     end
-    fd2 = p2*Td2;
+    Td2 = diag(pin2)*Td2;
+    
+    f2 = zeros(1,B);
+    fd2 = zeros(1,B);
+    for j=0:(B-1)
+        f2(j+1) = sum(T2(table == j));
+        fd2(j+1) = sum(Td2(table == j));
+    end
+
+%     for j=1:L
+%         for k=1:L
+%             v = bi2de(xor(de2bi(j-1,L),de2bi(k-1,L)));
+%             id = bi2de(selfxor(v,G,b));
+%             f2(id+1) = f2(id+1) + T2(j,k);
+%             fd2(id+1) = fd2(id+1) + Td2(j,k);
+%         end
+%     end
+    
     FIwor_total(i) = sum(fd2.^2./f2);
+    % since i.i.d., so multiply with subsketch size 
+    FIwr_total(i) = b*(4*li^2*(1-2*theta(i))^(2*li-2))/(1-(1-2*theta(i))^(2*li));
 end
 toc
 
