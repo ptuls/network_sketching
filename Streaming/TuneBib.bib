@@ -1,0 +1,1661 @@
+% Literature survey for traffic matrices
+%
+%       File created:   January 23, 2012
+%
+%       Paul Tune
+%
+
+%%% Months
+@string{JAN = "January"}
+@string{FEB = "February"}
+@string{MAR = "March"}
+@string{APR = "April"}
+@string{MAY = "May"}
+@string{JUN = "June"}
+@string{JUL = "July"}
+@string{AUG = "August"}
+@string{SEP = "September"}
+@string{OCT = "October"}
+@string{NOV = "November"}
+@string{DEC = "December"}
+
+%%% Journals
+@string{PIEEE = "Proceedings of the IEEE"}
+@string{IEEEJSAC = "IEEE J. Selected Areas in Communications"}
+@string{IEEETON = "IEEE/ACM Trans. Networking"}
+@string{IEEETCOM = "IEEE Trans. Communications"}
+@string{IEEETT = "IEEE Trans. Info. Theory"}
+@string{INTERNETWORK = "Journal of Internetworking: Research and Experience"}
+@string{IJDACS = "International Journal on Digital and Analog Communication Systems"}
+@string{IJCS = "International Journal on Communication Systems"}
+@string{ACMTCS = "ACM Trans. Computer Systems"}
+@string{JACM = "J. of the ACM"}
+@string{MTA = "Multimedia Tools and Applications"}
+@string{CC = "Computer Communications"}
+@string{IPJ = "Internet Protocol Journal"}
+
+%%% Magazines
+@string{CACM = "Communications of the ACM"}
+@string{COMPUTER = "IEEE Computer Magazine"}
+@string{IEEECOM = "IEEE Communication Magazine"}
+@string{IEEENET = "IEEE Network Magazine"}
+@string{CCR = "ACM SIGCOMM Computer Communication Review"}
+
+%%% Conferences
+@string{IMW = "Proc. ACM SIGCOMM Internet Measurement Workshop, IMW"}
+@string{IMC = "Proc. ACM SIGCOMM Internet Measurement Conference, IMC"}
+@string{INFOCOM = "Proc. IEEE Infocom"}
+@string{GLOBECOM = "Proc. IEEE GLOBECOM"}
+@string{GINET = "Proc. IEEE Global Internet Symposium"}
+@string{INET = "Proc. INET"}
+@string{IPOM = "Proc. IEEE Intl. Workshop on IP Operations and Management, IPOM"}
+@string{SIGCOMM = "Proc. ACM SIGCOMM"}
+@string{SIGMETRICS = "Proc. ACM SIGMETRICS"}
+@string{HSNMC="Proc. High Speed Networking and Multimedia Computing Symp."}
+@string{ICNP = "Proc. International Conference on Network Protocols"}
+@string{ICC = "Proc. International Conference on Communications"}
+@string{FTCS = "Proc. International Symposium on Fault-Tolerant Computing"}
+@string{ITCOM = "Proc. Workshop on Scalability and Traffic Control in IP Networks, SPIE ITCOM Conference"}
+@string{USITS = "Proc. USENIX Symposium on Internet Technologies and Systems"}
+@string{ICDCS = "Proc. International Conference on Distributed Computing Systems"}
+@string{NSDI = "Proc. USENIX Symposium on Networked Systems Design and Implementation"}
+@string{FDNA = "ACM SIGCOMM Workshop on Future Directions in Network Architecture"}
+@string{PAM = "Proc. of Passive and Active Measurement Workshop, PAM"}
+@string{HotNets = "Proc. SIGCOMM Workshop on Hot Topics in Networking, HotNets"}
+@string{E2EMON = "Proc. IEEE Workshop on End-to-End Monitoring, E2EMON"}
+
+%%% Publishers
+@string{AW="Addison-Wesley"}
+@string{CP="Cisco Press"}
+@string{PH="Prentice Hall"}
+@string{OR="O'Reilly"}
+@string{JW="John Wiley and Sons"}
+
+%%% Standards
+@string{IETF = "IETF"}
+@string{RFC = "RFC"}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recently added, uncategorised %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@Book{CoverThomas,
+  author = 	 {Thomas M. Cover and Joy A. Thomas},
+  title = 	 {Elements of Information Theory},
+  publisher = 	 {John Wiley and Sons},
+  year = 	 1991
+}
+
+@Book{cahn98:_wide_area_networ_desig,
+  author = 	 {Robert S. Cahn},
+  title = 	 {Wide Area Network Design},
+  publisher = 	 {Morgan Kaufman},
+  year = 	 1998}
+
+@InProceedings{teixera05:_traff_matrix_reload,
+  author = 	 {Renata Teixera and Nick Duffield and 
+                  Jennifer Rexford and Matthew Roughan},
+  title = 	 {Traffic Matrix Reloaded: Impact of Routing Changes},
+  booktitle = 	 {Workshop on Passive and Active Measurements},
+  year =	 2005
+}
+
+@Article{Norros,
+  author = 	 {Ilkka Norros},
+  title = 	 {On the Use of Fractional {B}rownian Motion in the 
+                  Theory of Connectionless Networks},
+  journal = 	 {IEEE Journal on Selected Areas in Communications},
+  year = 	 1995,
+  volume =	 13,
+  number =	 6,
+  pages =	 {953--961}
+}
+
+@InProceedings{roughan02:_mult,
+  author = 	 {Matthew Roughan and Joel Gottlieb},
+  title = 	 {Large-scale Measurement and Modeling of Backbone {I}nternet Traffic},
+  booktitle = 	 {SPIE ITCom},
+  year =	 2002,
+  address =	 {Boston}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tomography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@Article{Vardi96Tomo,
+  author = 	 {Yehuda Vardi},
+  title = 	 {{Network Tomography: Estimating source-destination traffic intensities from link data}},
+  journal = 	 {J.~Am.~Statist.~Assoc.},
+  year = 	 1996,
+  volume =	 91,
+  pages =	 {365--377},
+  annote =	 {Origin of network `tomography' term, in the context of traffic matrix estimation.}
+}
+
+@article{Tebaldi98Tomo,
+	author = {Claudia Tebaldi and Mike West},
+	title = {Bayesian Inference on Network Traffic Using Link Count Data},
+	journal = 	 {J.~Am.~Statist.~Assoc.},
+	volume = 93, 
+	number = 442,
+	month = JUN,
+	year =  1998},
+	pages = {557--573}
+}
+
+@article{Cao00Tomo,
+	author = {Jin Cao and Drew Davis and Scott Vander Wiel and Bin Yu},
+	title = {Time-Varying Network Tomography: {R}outer Link Data},
+	journal = 	 {J.~Am.~Statist.~Assoc.},
+	volume = 95, 
+	number = 452,
+	month = DEC,
+	year = 2000, 
+	pages = {1063--1075}
+}
+ 
+%  author =       {A.~Adams et al.},
+@ARTICLE{MINC00Tomo,
+  AUTHOR  = {A.~Adams and T.~Bu and T.~Caceres and N.G.~Duffield and T.~Friedman and J.~Horowitz and F.~Lo Presti and S.B.~Moon and V.~Paxson and D.~Towsley},
+  TITLE   = {{The use of End-to-end Multicast Measurements for Characterising Internal Network Behavior}},
+  JOURNAL = {IEEE Communications Magazine, special issue on "Network Traffic Measurements and Experiments},
+  MONTH   = {May},
+  YEAR    = {2000},
+  VOLUME  = {38},
+  NUMBER  = {5},
+  PAGES   = {152--158},
+  annote  = {Overview article covering loss, delay, and topology tomo.
+             Many pictures, little maths, ns simulation examples.}
+}
+
+@Article{tomo_CHNY_2002,
+  author = 	 {M.~Coates and A.~Hero and R.~Nowak and B.~Yu},
+  title = 	 {{Internet tomography}},
+  journal = 	 {Signal Processing Magazine},
+  year = 	 2002,
+  volume =	 19,
+  number =	 3,
+  pages =	 {47--65},
+  month =	 {May},
+  annote =	 {Overview article covering loss, delay, topology, and traffic matrix tomo.
+                Many pictures, little maths, ns simulation examples and detailed of nice real world experiments with validation. Two minutes windows (1200 probes) showed good tracking of real loss rate for losses within 4-30 percent.
+Ends with plans for expanded use of MINC using NIMI and an extension to RTP.}
+}
+
+@Article{tomo_CCLNY_2004,
+  author = 	 {R.~Castro and M.J.~Coates and G.~Liang and R.~Nowak and B.~Yu},
+  title = 	 {{Network Tomography: Recent Developments}},
+  journal = 	 {Statistical Science Magazine},
+  year = 	 2004,
+  volume =	 19,
+  number =	 3,
+  pages =	 {499-517},
+  month =	 {August},
+  annote =	 {Overview article covering mainly topology, and traffic matrix tomo.
+              Focussed on the issues of reducing accuracy to control scalability and invertibility. Covers Pseudo-Likelihood approaches.}
+}
+
+
+@article{aggregate,
+  author    = {N. G. Duffield and
+               V. Arya and
+               R. Bellino and
+               T. Friedman and
+               J. Horowitz and
+               D. Towsley and
+               T. Turletti},
+  title     = {Network tomography from aggregate loss reports},
+  journal   = {Performance Eval.},
+  volume    = {62},
+  number    = {1-4},
+  year      = {2005},
+  pages     = {147--163}
+}
+
+
+%%%%%%%%%%% tomography loss %%%%%%%%%%%%
+@inproceedings{yajnik95packet,
+    author = {M.~Yajnik and J.~Kurose and D.~Towsley},
+    title  = {{Packet Loss Correlation in the MBone Multicast Network}},
+ booktitle = {Proc.~IEEE Global Internet},
+    month  = {Nov},
+    year   = {1996},
+    url    = {citeseer.ist.psu.edu/article/yajnik96packet.html},
+    annote = {Largely empirical paper, but with the primitive origin of tomo-loss in it
+             (not correct however, assumes loss send by 2 receivers implies loss was on shared path}
+}
+
+@inproceedings{tomo_loss_CDHTB_1999,
+  author   = {R.~Caceres and N.G.~Duffield and J.~Horowitz and D.~Towsley and T.~Bu},
+  TITLE    = {{Multicast-Based Inference of Network Internal Loss Characteristics: Accuracy of Packet Estimation}},
+  booktitle= {IEEE INFOCOM'99},
+  month    = {Mar},
+  YEAR     = {1999},
+  address  = {New York, NY.},
+    annote = {Paper is sourced from the same 1998 technical report underlying tomo_loss_CDHT_1999.
+  Here the focus is on comparison of losses seen by probes vs CT.
+ Looks at spatial and temporal deviation from iid model (temporal found small), and probes vs CT (major component).
+ Makes comments on Poisson versus periodic probing, and average separation compared to TCP's RTT.
+ Wierd reasoning whereby bias decreases and variance decreases when probes sent Closer together! (because looking at ability of probes to measure transient TCP loss).
+  Much of the paper is similar to tomo_loss_CDHT_1999, but with some extras details making it less dense, and some proofs omitted. The simulation section is expanded, many empirical results showing variance and closeness to real loss as a fn of ns TCP parameters, with interpretations.}
+}
+
+%%  *** selected for NC_Tomo ***  was loss
+@ARTICLE{tomo_loss_CDHT_1999,
+  author   = {R.~Caceres and N.G.~Duffield and J.~Horowitz and D.~Towsley},
+  TITLE    = {{Multicast-Based Inference of Network-Internal Loss Characteristics}},
+  JOURNAL  = {IEEE Transactions on Information Theory},
+  YEAR     = {1999},
+  VOLUME   = {45},
+  PAGES    = {2462--2480},
+  annote   = {Core paper, first I read. Initially a 1998 tech report. One of the first
+tomo_loss papers.
+Begins with iid losses, but explores effects of both temporal and spatial dependence,
+including Markovian characterisation of temporal loss. Proves that the general
+(arbitrary degree) `beta' recurrence is, asymptotically, the MLE in the iid case.}
+}
+
+%%  *** selected for NC_Tomo ***
+@inproceedings{tomo_loss_CN_2000,
+  author    = {M.J.~Coates and R.~Nowak},
+  title     = {{Network Loss Inference using Unicast End-to-End Measurement}},
+  booktitle = {ITC Conference on IP Traffic, Modelling and Management},
+  address   = {Monterey, CA},
+  month     = {Sep},
+  year      = {2000},
+  annote    = {First Nowak paper on loss, comes from TR-002 Tech report.
+Using factor graphs, Bayesian and EM algo to estimate loss distributions on each link,
+with constraints. Uses independent links, and Postulates alpha(11) given alpha(1)
+for B2B probes. Considers sending n well spaced probes-pairs, treating first member
+as Bernoulli, and second as conditional. Weird model but interesting (technically non-staty).}
+}
+
+@inproceedings{tomo_loss_DPPT_2001,
+    author    = "N.G.~Duffield and F.~Lo Presti and V.~Paxson and D.~Towsley",
+    title     = {{Inferring Link Loss Using Striped Unicast Probes}},
+    booktitle = {IEEE INFOCOM},
+    pages     = "915--923",
+    year      = "2001",
+    address = {Anchorage, Alaska},
+    month =	 {April 22--26},
+    url       = "citeseer.ist.psu.edu/duffield01inferring.html"
+}
+
+@inproceedings{tomo_loss_CN_2001,
+  author    = {Yolanda Tsang and M.J.~Coates and R.~Nowak},
+  title     = {{Passive Network Tomography using EM Algorithms}},
+  booktitle = {Proc.~IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)},
+  address   = {Salt Lake City, Utah},
+  month     = {May},
+  year      = {2001},
+  annote    = {Second (and last not counting tech report Tree0108) Nowak loss paper.
+   Talks about passive but basically just assumed you have as many well separated B2B probes as you like, and uses assumptions of tomo_loss_CN_2000.
+   Poses problem then relies on EM algorithm to do the rest numerically.}
+}
+
+@ARTICLE{tomo_loss_DHTWF_2002,
+  AUTHOR  = {N.G.~Duffield and J.~Horowitz and D.~Towsley and W.~Wei and T.~Friedman},
+  TITLE   = {{Multicast-based loss inference with missing data}},
+  JOURNAL = {{IEEE} Journal on Selected Areas of Communications},
+  YEAR    = {2002},
+  VOLUME  = {20},
+  NUMBER  = {4},
+  PAGES   = {700--713},
+  annote  = {Followup to the Bernoulli loss problem, but allowing receiver data to be missing.
+             The resulting MLE is calculated using EM.  Another very dense paper.}
+}
+
+@Article{tomo_loss_DHPT_2006,
+  author  = {N.G.~Duffield and J.~Horowitz and F.~Lo Presti and D.~Towsley},
+  title   = {{Explicit loss inference in multicast tomography}},
+  journal = {IEEE Transactions in Information Theory},
+  year    = 2006,
+  note    = {to appear}
+}
+
+%% not tomo, but related
+@inproceedings{badabing,
+  author    = {Joel Sommers and Paul Barford and Nick Duffield and Amos Ron},
+  title     = {{Improving accuracy in end-to-end packet loss measurement}},
+  booktitle = {ACM SIGCOMM},
+  year      = {2005},
+  pages     = {157--168},
+  summary = {alternative to Poisson loss measurement}
+}
+
+
+%%%%%%%%%%% tomography topology %%%%%%%%%%%%
+%%  *** selected for NC_Tomo ***
+@inproceedings{tomo_topol_RMcC_1999,
+    author    = "Sylvia Ratnasamy and Steven McCanne",
+    title     = {{Inference of Multicast Routing Trees and Bottleneck Bandwidths Using End-to-end Measurements}},
+    booktitle = {IEEE INFOCOM'99},
+    pages     = "353--360",
+    year      = "1999",
+    url       = "citeseer.ist.psu.edu/ratnasamy99inference.html",
+    annote    = {One of the first tomo_topol papers, based on early tomo_loss.
+Actual aim is to locate bottlenecks, loss is used to find the logical tree first, then
+bottleneck capacity estimation for the localisation.
+Nice intro to reliable multicasting motivating need to know topology, also mtrace later on.
+Defines 'true' and `false' shared losses over a set of receivers, ie losses over the shared
+path, or separately over both non-shared paths, and then solves the familar basic
+scheme (binary two leaf topology, iid losses).
+The expression (and estimates) for shared losses are used to coalesce nodes pairwise from
+the bottom up, creating a binary tree (one fuses the nodes with the highest probability
+over all receiver pairs). Issues in the non-binary case are explored, based on comparing
+shared loss probs under different scenarios, with a threshold. Well written.}
+}
+
+%%  *** selected for NC_Tomo ***
+@inproceedings{tomo_topol_CDHPT_1999,
+  author     = {R.~Caceres and N.G.~Duffield and J.~Horowitz and F.~Lo~Presti and D.~Towsley},
+  title      = {{Loss-Based Inference of Multicast Network Topology}},
+  booktitle  = {IEEE Conference on Decision and Control},
+  pages      = {371--379},
+  year       = {1999},
+  address    = {Pheonix, Arizona},
+  month      = {Dec},
+  url        = {citeseer.ist.psu.edu/caceres98multicastbased.html},
+  annote     = {Six page paper tackling topology from loss, based on MLE (solvable,
+so no EM, and no Bayesian).  Mixture of proofs and easy stuff.
+Refers to Ratnasamy and McCanne and tomo_loss_CDHT_1999.}
+}
+
+% was DHLT02
+@Article{tomo_topol_DHLT_2002,
+  author  = 	 {N.G.~Duffield and J.~Horowitz and F.~Lo Presti and D.~Towsley},
+  title   = 	 {{Multicast Topology Inference from Measured End-to-End Loss}},
+  journal = 	 {IEEE Transactions in Information Theory},
+  year    = 	 2002,
+  volume  =	 48,
+  number  =      1,
+  pages   =	 {26--45},
+  annote  =      {Discusses three methods of deriving topology from loss, subsuming
+Ratnasamy and McCanne and extending their own loss paper in particular, including a
+Bayesian approach.  Builds on earlier results a lot, assez complex.}
+}
+
+@inproceedings{tomo_topol_CCGKTN_2002,
+  author    = {M.J.~Coates and R.~Castro and M.~Gadhiok and R.~King and Y.~Tsang and R.~Nowak},
+  title     = {{Maximum Likelihood Network Topology Identification from Edge-based Unicast Measurements}},
+  booktitle = {Proc~ACM Sigmetrics},
+  address   = {Marina Del Rey, CA},
+  month     = {Jun},
+  year      = {2002},
+  pages     = {11--20},
+  annote    = {This was in my session with the best paper award! Uses delay differences from probes separated by a large spacer which drops out at the branching point.
+Tries to recover global topology using penalised likelihood.
+'Finding the tallest tree in the forest'.}
+}
+
+
+%%%%%%%%%%% tomography delay %%%%%%%%%%%%
+@inproceedings{tomo_delay_DP_2000,
+  author      = {N.G.~Duffield and F.~Lo Presti},
+  title       = {{Multicast Inference of Packet Delay Variance at Interior Network Links}},
+  booktitle   = {IEEE INFOCOM},
+  PAGES       = {1351--1360},
+  month       = {March},
+  year        = {2000},
+  address     = {Tel Aviv, Israel},
+  annote      = {Seems to be the first tomo-delay paper.
+Measures link delay variance (not delay itself) over a tree using iid Bernouilli losses, assuming topology known.
+Based on fact that covariance over receivers is just variance over shared path.
+Quantifies increase of variance due to temporal and spatial dependence, notes consistency regardless provided ergodic.
+Looks for optimal convex combination to minimize variance. Details rely on standard theorems but messy
+matrix calculations.
+Can go to higher moments of shared path at node k if node degree is higher, in terms of the first moment at leaves (in fact, the precise connection is via cumulants).
+Incorporates effects of lost packets reducing amount of available data.
+Both model and ns simulations.
+Mentions that could use delay variance to infer topology (like do in loss work)}
+}
+
+@inproceedings{tomo_delay_CN_2001,
+  author    = {M.J.~Coates and R.~Nowak},
+  title     = {{Network Tomography for Internal Delay Estimation}},
+  booktitle = {Proc.~IEEE Int.~Conf.~Acoustics, Speech, and Signal Processing (ICASSP)},
+  address   = {Salt Lake City, Utah},
+  month     = {May},
+  year      = {2001},
+  annote    = {Short paper.  Could be good intro to in context EM algo.}
+}
+
+@article{tomo_delay_PDHT_2002,
+ author  = {F.~Lo Presti and N.~G.~Duffield and J.~Horowitz and Don Towsley},
+ title   = {{Multicast-based inference of network-internal delay distributions}},
+ journal = {IEEE/ACM Transactions on Networking},
+ volume  = {10},
+ number  = {6},
+ year    = {2002},
+ pages   = {761--775},
+ annote  = {Uses deconvolution to extract per-link queueing distributions, ie entire delay distributions excluding the propagations delay minima.}
+}
+
+%%%%%%%%%%%%%%%%%%%%%% Traffic Matrices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%% Taxonomy  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Medina02Taxonomy,
+	author = {A. Medina and Chuck Fraleigh and Nina Taft and Supratik Bhattacharyya and Christophe Diot},
+	title = {A Taxonomy of {IP} Traffic Matrices},
+	journal = {Proc. SPIE},
+	volume = 4868,
+	number = 200,
+	month = JUL,
+	year = 2002
+}
+	
+@techreport{Grossglauser01PassiveIP,
+	author = {Mathias Grossglauser and Jennifer Rexford},
+	title = {Passive traffic measurement for {IP} operations},
+	institution = {ATT Research},
+	url = {http://www.research.att.com/jrex},
+	year = 2001
+}
+
+%%%%%%%%%%%%%%%%%%%%%% Linear Programming %%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Goldschmidt00LP,
+	author = {Olivier Goldschmidt},
+	title = {{ISP} Backbone Inference Methods to Support Traffic Engineering: {M}ethodology and Experience},
+	booktitle = {Internet Statistics and Metrics Analysis (ISMA) Workshop},
+	location = {San Diego, CA},
+	month = DEC,
+	year = {2000}
+}
+
+%%%%%%%%%%%%%%%%%%%%%% Gravity Models %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Zhang05InfoTh,
+	author = {Yin Zhang and Matthew Roughan and Carsten Lund and David Donoho},
+	title = {Estimating {P}oint-to-{P}oint and {P}oint-to-{M}ultipoint traffic matrices: {A}n information-theoretic approach},
+	journal = IEEETON,
+	volume = {13},
+	number = {5},
+	pages = {947--960},
+	month = OCT,
+	year = {2005},
+	annote = {Promotes the use of the Maximum Entropy principle, by using mutual information as a penalty. Can be 
+	viewed as a penalty factor measuring the KL divergence between the observations and the gravity model.}
+}
+
+@inproceedings{Zhang03InfoSIGCOMM,
+	author = {Yin Zhang and Matthew Roughan and Carsten Lund and David Donoho},
+	title = {An Information-Theoretic Approach to Traffic Matrix Estimation},
+	booktitle = {ACM SIGCOMM},
+	 location = {Karlsruhe, Germany},
+ 	pages = {301--312},
+	year = {2003},
+	annote = {Conference version of the above paper}
+}
+
+@inproceedings{Zhang03Fast,
+	author = {Yin Zhang and Matthew Roughan and Nick Duffield and Albert Greenberg},
+	title = {Fast Accurate Computation of Large-Scale {IP} Traffic Matrices from Link Loads},
+	booktitle = {ACM SIGMETRICS 2003},
+	location = {San Diego, California, US},
+ 	pages = {206--217},
+	year = {2003},
+	annote = {First introduces the generalized gravity model. The other contribution is estimate the traffic matrix 
+	tomography style, by considering link loads from SNMP measurements. Together, it becomes tomogravity. Use of
+	quadratic penalization factor for measuring divergence between observations and gravity model}
+}
+
+@article{Oikonomou10GravMaxEnt,
+	author = {Kostas N.~Oikonomou},
+	title = {Analytic forms for most likely matrices derived from incomplete information},
+	journal = {Int. J. Systems Science},
+	volume = {43},
+	number = {3},
+	month = SEP,
+	year = {2010},
+	pages = {443--458},
+	annote = {Explains why the gravity model is the optimal choice when there is limited information on the matrix,
+	based on the principle of maximum entropy}
+}
+
+@article{Jaynes57MaxEnt,
+  	title = {Information Theory and Statistical Mechanics},
+  	author = {Edwin Thompson Jaynes},
+  	journal = {Phys. Rev.},
+ 	volume = {106},
+  	issue = {4},
+  	pages = {620--630},
+  	year = {1957},
+  	month = MAY
+}
+
+%%%%%%%%%%%%%%%% Independent Connections Model %%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Erramilli06IndepConn,
+	author = {Vijay Erramilli and Mark Crovella and Nina Taft},
+	title = {An Independent-Connection model for traffic matrices},
+	booktitle = {ACM IMC 2006},
+	location = {Rio de Janeiro, Brazil},
+	month = OCT,
+	year = {2006},
+	pages = {251--256}
+}
+
+@techreport{Erramilli06IndepConnTech,
+	author = {Vijay Erramilli and Mark Crovella and Nina Taft},
+	title = {An Independent-Connection model for traffic matrices},
+	institution = {Department of Computer Science, Boston University},
+	number = {BUCS-TR-2006-022},
+	month = SEP,
+	year = {2006},
+}
+
+%%%%%%%%%%%%%%%%%%%%%% Choice models %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Medina02TMdirections,
+	author = {A. Medina and Nina Taft and Kav\'{e} Salmatian and Supratik Bhattacharyya and Christophe Diot},
+	title = {Traffic matrix estimation: {E}xisting techniques and new directions},
+	booktitle = {ACM SIGCOMM},
+	location = {Pittsburgh, Pensylvannia, US},
+	year = {2002},
+	annote = {Introduces the choice model and fanout formulation. This allows reparameterization as a overdetermined
+	problem, enabling a unique solution to be found.}
+}
+
+@techreport{Swait59Choice,
+	author = {Joffre Dan Swait},
+	title = {Probabilistic Choice Set Information in Transportation Demand},
+	institution = {Department of Civil and Environmental Engineering, MIT},
+	month = JUN,
+	year = 1984
+}
+@book{Akiva89DCAnalysis,
+	author = {Moshe Ben Akiva and Steven R. Lerman},
+	title = {Discrete choice analysis},
+	publisher = {MIT Press},
+	year = 1989
+}
+
+@book{Cascetta09Transport,
+	author = {Ennio Cascetta},
+	title = {Transportation Systems Analysis},
+	series = {Optimization and Its Applications},
+	edition = {2nd},
+	volume = {29},
+	year = 2009,
+	publisher = {Springer}
+}
+
+%%%%%%%%%%%%%%%%%%%%%% Bayesian methods %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{Soule05TM,
+	author = {Augustin Soule and Anukool Lakhina and Nina Taft and Konstantina Papagiannaki and Kave Salmatian
+			and Antonio Nucci and Mark Crovella and Christophe Diot},
+	title = {Traffic matrix: {B}alancing measurements, inference and modeling},
+	booktitle = {ACM SIGMETRICS 2005},
+	location = {Banff, Alberta, Canada},
+	month = JUN,
+	year = {2005},
+	pages = {362--373},
+	annote = {Introduces the PCA and Kalman filter methods, compares all previous methods}
+}
+
+@article{Soule05TMKalman,
+	author = {Augustin Soule and Kav\'{e} Salamatian and Antonio Nucci and Nina Taft},
+ 	title = {Traffic matrix tracking using {K}alman filters},
+ 	journal = {SIGMETRICS Perform. Eval. Rev.},
+ 	volume = {33},
+ 	issue = {3},
+ 	month = {December},
+ 	year = {2005},
+	pages = {24--31}
+} 
+
+@article{Soule04TMLargest,
+ 	author = {Augustin Soule and Antonio Nucci and Rene Cruz and Emilio Leonardi and Nina Taft},
+ 	title = {How to identify and estimate the largest traffic matrix elements in a dynamic environment},
+ 	journal = {SIGMETRICS Perform. Eval. Rev.},
+ 	volume = {32},
+ 	number = {1},
+ 	month = {June},
+ 	year = {2004},
+ 	pages = {73--84},
+ 	keywords = {network tomography, traffic matrix estimation}
+} 
+
+%%%%%%%%%%%%%%%%%%%%%% Low rank models %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{Zhang09TMCS,
+	author = {Yin Zhang and Matthew Roughan and Walter Willinger and Lili Qiu},
+	title = {Spatio-{T}emporal compressive sensing and {I}nternet traffic matrices},
+	booktitle = {ACM SIGCOMM},
+	location = {Barcelona,Spain},
+	month = AUG,
+	year = {2009},
+	pages = {267--278},
+	annote = {Exploits low rank structure of traffic matrices over several measurement intervals, due to spatio-temporal
+	correlations. Tests two main algorithms: sparsity regularized SVD and sparsity regularized matrix factorization 
+	(SRMF), also variants of these. Show that performance is good, various models that precede SRMF are special
+	cases of SRMF. Can be used for other tasks as well, such as prediction and anomaly detection. Proves that 
+	spatio-temporal correlations exists and should be exploited.}
+} 
+
+@inproceedings{Bharti10Invisible,
+	author = {Vineet Bharti and Pankaj Kankar and Lokesh Setia and Gonca G\"{u}rsun and Anukool Lakhina and Mark 
+	Crovella},
+ 	title = {Inferring invisible traffic},
+ 	booktitle = {Proceedings of the 6th International Conference},
+ 	series = {Co-NEXT '10},
+ 	year = {2010},
+ 	location = {Philadelphia, Pennsylvania},
+ 	pages = {22:1--22:12},
+} 
+
+%%%%%%%%%%%%%%%%%%%%%% Testing TMs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{Roughan03TETM,
+	author = {Matthew Roughan and Mikkel Thorup and Yin Zhang},
+	title = {Traffic Engineering with estimated traffic matrices},
+	booktitle = {ACM IMC 2003},
+	location = {Miami Beach, Florida, US},
+	month = OCT,
+	year = {2003},
+	pages = {248--258},
+	annote = {Talks about the use of estimated traffic matrices used in various traffic engineering tasks. Main point
+	is that although some estimation methods may have bad performance, they may be remarkably good when used
+	for traffic engineering purposes. The task optimized for is the maximum sum rate. }
+}
+
+@inproceedings{Gunnar04TMLargeIP,
+	author = {Anders Gunnar and Mikael Johansson and Thomas Telkamp},
+	title = {Traffic matrix estimation: {A} comparison on real data},
+	booktitle = {ACM IMC 2004},
+	location = {Taormina,Sicily,Italy},
+	month = OCT,
+	year = {2004},
+	pages = {149--160},
+	annote = {Compares all the proposed techniques on estimating PoP traffic matrices in IP backbones.}
+}
+
+%%%%%%%%%%%%%%%% Traffic properties %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Lakhina04TrafficStruct,
+ 	author = {Anukool Lakhina and Konstantina Papagiannaki and Mark Crovella and Christophe Diot and Eric D. 
+	Kolaczyk and Nina Taft},
+ 	title = {Structural analysis of network traffic flows},
+ 	journal = {SIGMETRICS Perform. Eval. Rev.},
+ 	volume = {32},
+ 	number = {1},
+ 	month = {June},
+ 	year = {2004},
+ 	pages = {61--72},
+ 	keywords = {network traffic analysis, principal component analysis, traffic engineering}
+} 
+
+@inproceedings{Roughan02BRvariable,
+	author = {Matthew Roughan and Albert Greenberg and Charles Kalmanek and Michael Rumsewicz and Jennifer 
+		       Yates and Yin Zhang},
+	title = {Experience in measuring backbone traffic variability: {M}odels, metrics, measurements and meaning},
+	booktitle = {ACM IMW},
+	year = {2002},
+	annote = {Proposes a simple model to estimate the temporal variability of traffic matrices }
+}
+
+@inproceedings{Teixeira05TMRoute,
+    	author = {Renata Teixeira and Nick Duffield and Jennifer Rexford and Matthew Roughan},
+    	title = {Traffic Matrix Reloaded: {I}mpact of Routing Changes},
+    	booktitle = {Proc. Passive and Active Measurement Workshop},
+	month = APR,
+    	year = {2005},
+    	pages = {251--264}
+}
+
+@article{Teixeira04PotatoSIG,
+	author = {Renata Teixeira and Aman Shaikh and Tim Griffin and Jennifer Rexford},
+ 	title = {Dynamics of hot-potato routing in {IP} networks},
+ 	journal = {SIGMETRICS Perform. Eval. Rev.},
+ 	volume = {32},
+ 	issue = {1},
+ 	month = {June},
+ 	year = {2004},
+ 	pages = {307--319}
+} 
+
+@inproceedings{Teixeira04Potato,
+ 	author = {Renata Teixeira and Aman Shaikh and Tim Griffin and Jennifer Rexford},
+ 	title = {Dynamics of hot-potato routing in {IP} networks},
+ 	booktitle = {SIGMETRICS 2004},
+	year = {2004},
+ 	pages = {307--319}
+} 
+
+@inproceedings{Lakhina04PCA,
+ 	author = {Anukhool Lakhina and Mark Crovella and Christophe Diot},
+ 	title = {Diagnosing Network-Wide Traffic Anomalies},
+ 	booktitle = {ACM SIGCOMM},
+	month = SEP,
+	year = {2004},
+ 	pages = {219--230},
+	annote = {Discusses examining the temporal properties of the traffic matrix via PCA}
+} 
+
+@article{Paxson97Routing,
+	author = {Vern Paxson},
+	title = {End-to-{E}nd Routing Behavior in the {I}nternet},
+	journal = IEEETON,
+	volume = {5},
+	number = {5},
+	month = OCT,
+	year = 1997,
+	pages = {601--615}
+}
+
+@article{Leland94SS,
+	author = {Will E. Leland and Murad S. Taqqu and Walter Willinger and Daniel V. Wilson},
+	title = {On the Self-Similar Nature of {E}thernet Traffic ({E}xtended version)},
+	journal = IEEETON,
+	volume = 2,
+	number = 1,
+	month = FEB,
+	year = 1994,
+	pages = {1--15}
+}
+	
+
+%%%%%%%%%%%%%%%% Direct TM measurement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Feldmann00Netscope,
+	author = {Anja Feldmann and Alan Greenberg and Carsten Lund and Nick Reingold and Jennifer Rexford},
+	title = {Netscope: {T}raffic engineering for {IP} networks},
+	 journal = {IEEE Net. Magazine},
+	 volume = {14},
+	 issue = {2},
+	 month = MAR,
+	 year = {2000},
+	 pages = {11--19}
+}
+
+@article{Feldmann01TMdemand,
+	author = {Anja Feldmann and Alan Greenberg and Carsten Lund and Nick Reingold and Jennifer Rexford and Fred True},
+	title = {Deriving Demands for operational {IP} networks: {M}ethodology and experience},
+	 journal = IEEETON,
+	 volume = {9},
+	 issue = {3},
+	 month = JUN,
+	 year = {2001},
+	 pages = {265--280}
+}
+
+%%%%%%%%%%%%%%%% Topology measurement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Spring04Rocketfuel,
+	author = {Neil Spring and Ratul Mahajan and David Wetherall},
+	title = {Measuring {ISP} Topologies with {R}ocketfuel},
+	 journal = IEEETON,
+	 volume = {12},
+	 issue = {1},
+	 month = FEB,
+	 year = {2004},
+	 pages = {2--16}
+}
+
+@article{Alderson06Topology,
+	 author = {David L. Alderson and Hyunseok Chang and Matthew Roughan and Steve Uhlig and Walter Willinger},
+	 title = {The many facets of {I}nternet topology and traffic.},
+ 	 journal = {Networks and Heterogeneous Media},
+	 volume = 1,
+	 number = 4,
+  	pages = {569-600},
+	month = DEC,
+  	year = 2006
+}
+
+@inproceedings{Huffaker02Skitter,
+	author={Bradley Huffaker and Daniel Plummer and David Moore and Kimberley Claffy},
+	booktitle={Applications and the Internet (SAINT) Workshops, 2002. Proceedings. 2002 Symposium on},
+	title={Topology discovery by active probing},
+	year={2002},
+	pages={90 -96},
+}
+
+@article{Erdos85Graph,
+	author = {Paul Erdos and Alfred Renyi},
+	title = {On Random Graphs},
+	journal = {Mathematical Inst. Hungarian Academy},
+	number = 196,
+	location = {London},
+	publisher = {Academic Press},
+	year = 1985
+}
+
+@article{Haddadi08Topo,
+	author = {Hamed Haddadi and Miguel Rio and Gianluca Iannaccone and Andrew Moor and Richard Mortier},
+	title = {Network Topologies: {I}nference, Modeling and Generation},
+	journal = {IEEE Commun. Surveys},
+	volume = {10},
+	number = {2},
+	year = {2008}
+}
+
+@article{Faloutsos99PwrLaw,
+	author = {Michalis Faloutsos and Petros Faloutsos and Christos Faloutsos},
+	title = {On Power-Law Relationships of the {I}nternet Topology},
+	journal = {ACM SIGCOMM},
+	volume = {29},
+	number = {4},
+	month = OCT,
+	year = 1999
+}
+
+%%%%%%%%%%%%%%%% Network Planning %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@incollection{Roughan10Robust,
+	author = {Matthew Roughan},
+	title = {Robust Network Planning},
+	chapter = {5},
+	booktitle = {The Guide to Reliable Internet Services and Applications},
+	editor = {Charles R.~Kalmanek and Supid Misra and Richard Yang},
+	publisher = {Springer},
+	year = {2010},
+	pages = {137--177}
+}
+
+%%%%%%%%%%%%%%%% Simulation of TMs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Roughan05GravSynth,
+	author = {Matthew Roughan},
+	title = {Simplifying the synthesis of {I}nternet traffic matrices},
+	journal = {SIGCOMM Comput. Commun. Rev.},
+	volume = {35},
+	number = {5},
+	year = {2005},
+	pages = {93--96}
+}
+
+@article{Nucci05TMSynth,
+ 	author = {Antonio Nucci and Ashwin Sridharan and Nina Taft},
+	title = {The problem of synthetically generating {IP} traffic matrices: {I}nitial recommendations},
+ 	journal = {SIGCOMM Comput. Commun. Rev.},
+ 	volume = {35},
+ 	issue = {3},
+ 	month = JUL,
+ 	year = {2005},
+ 	pages = {19--32}
+} 
+
+@article{Akaike74AIC,
+	author = {Hirotugu Akaike},
+	title = {A new look at statistical model identification},
+	journal = {IEEE Trans. Autom. Control},
+	volume = {19},
+	number = {6},
+	month = DEC,
+	year = 1974,
+	pages = {716--723}
+}
+
+@article{Wallace99MML,
+	author = {Christopher S. Wallace and David M. Boulton},
+	title = {An information measure for classification},
+	journal = {Computer Journal},
+	volume = 11,
+	number = 2,
+	month = AUG,
+	year = 1968,
+	pages = {185--194}
+}
+	
+
+@article{Rissanen83MDL,
+	author = {Jorma Rissanen},
+	title = {A Universal prior for integers and estimation by minimum description length},
+	journal = {Ann. Statis.},
+	volume = 11,
+	number = 2,
+	month = JUN,
+	year = 1983,
+	pages = {416--431}
+}
+
+%%%%%%%%%%%%%%%%% Changing Underlying Traffic %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{Nucci04IGPchange,
+	author = {A Nucci and Rene Cruz and Nina Taft and Christophe Diot},
+	booktitle = {INFOCOM 2004},
+	title = {Design of {IGP} link weight changes for estimation of traffic matrices},
+	year = {2004},
+	month = MAR,
+	volume = {4},
+	number = {},
+	pages = {2341--2351},
+	annote = {Changing underlying IGP weights to change the routing matrix. Increases diversity in link measurements
+	that adds information to estimating the traffic matrix}
+}
+
+@inproceedings{Soule04TMLargest,
+	author = {Augustin Soule and Antonio Nucci and Rene Cruz and Emilio Leonardi and Nina Taft},
+	title = {How to Identify and Estimate the Largest Traffic Matrix Elements in a Dynamic Environment},
+	booktitle = {ACM SIGMETRICS 2004},
+	pages = {73--84},
+	month = JUN,
+	year = 2004,
+	annote = {Changes router matrix to form a full rank linear model from the time series of TM measurements. Also includes a 
+	simple temporal model.}
+}
+
+%%%%%%%%%%%%%%%%% Inversion Techniques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Krupp78Kruithof,
+	author = {R. S. Krupp},
+	title = {Properties of {K}ruithof's projection method},
+	journal = {The Bell Sys. Tech. Journal},
+	volume = 58,
+	number = 2,
+	month = FEB,
+	year = 1979
+}
+
+%%%%%%%%%%%%%%%  Use of gravity model in other areas %%%%%%%%%%%%%%%%%%%%%%%%%
+@book{Sen95Gravity,
+	author = {Ashish K.~Sen and Tony E.~Smith},
+	title = {Gravity models of spatial interaction behavior},
+	publisher = {Springer},
+	year = 1995
+}
+
+@article{Lam97Teletraffic,
+	author = {Derek Lam and Donald Cox and Jennifer Widom}, 
+	title = {Teletraffic modeling for personal communications services},
+	journal = {IEEE Communications Magazine: Special Issues on Teletraffic Modeling Engineering and Management
+			in Wireless and Broadband Networks},
+	volume = {35},
+	pages = {79--87},
+	month = FEB,
+	year = {1997}
+}
+
+@inproceedings{Kowalski95TeleModel,
+	author = {Jacek Kowalski and Bob Warfield},
+	title = {Modeling traffic demand between nodes in a telecommunications network},
+	booktitle = {ATNAC '95},
+	year = {1995}
+}
+
+@article{Tinbergen62Econ,
+	author = {Jan Tinbergen},
+	title = {Shaping the world economy: {S}uggestions for an international economic policy},
+	journal = {The Twentieth Century Fund},
+	year = {1962}
+}
+
+@article{Pyhnen63Trade,
+	author = {Pentti P\"{o}yh\"{o}nen},
+	title = {A tentative model for the volume of trade between countries},
+	journal = {Weltwirtschaftliches Archive},
+	volume = {90},
+	pages = {93--100},
+	year = {1963}
+}
+
+@article{Ferrari06Pollinator,
+	author = {Matthew J.~Ferrari and Ottar N.~Bjornstad and Jessica L.~Partain and Janis Antonovics},
+	title = {A Gravity Model for the spread of a pollinator-borne plant pathogen},
+	journal = {American Naturalist},
+	volume = {168},
+	number = {3},
+	month = SEP,
+	year = 2006,
+	pages = {294--303}
+}
+
+@article{Murray77Measles,
+	author = {G.~D.~Murray and A.~D.~Cliff},
+	title = {A stochastic model for measles epidemics in a multi-regional setting},
+	journal = {Trans. Institue British Geographers},
+	volume = {2},
+	pages = {158--174},
+	year = 1977
+}
+
+@article{Xia04Measles,
+	author = {Y.~C.~Xia and Ottar N.~Bjornstad and B.~T.~Grenfell},
+	title = {Measles metapopulation dynamics: {A} gravity model for epidemiological coupling and dynamics},
+	journal = {American Naturalist},
+	volume = {164},
+	number = {3},
+	year = 2004,
+	pages = {267--281}
+}	
+
+@book{Erlander90GravTransport,
+	author = {Sven Erlander and Neil F.~Stewart},
+	title = {The gravity model in transportation analysis: {T}heory and extensions},
+	series = {Topics in Transportation},
+	publisher = {International Science},
+	location = {Utrech, Netherlands},
+	year = {1990}
+}
+
+@article{Stewart48Socio,
+	author = {John Q.~Stewart},
+	title = {Demographic gravitation: {E}vidence and applications},
+	journal = {Sociometry},
+	volume = {11},
+	number = {1/2},
+	month = FEB,
+	year = {1948},
+	pages = {31--58}
+}
+
+@article{Converse49RetGravNew,
+	author = {P.~D.~Converse},
+	title = {New laws of retail gravitation},
+	journal = {The Journal of Marketing},
+	volume = {14},
+	number = 3,
+	month = OCT,
+	year = 1949,
+	pages = {379--384}
+}
+
+@article{Reynolds53RetailGrav,
+	author = {Robert B.~Reynolds},
+	title = {A test of the law of retail gravitation},
+	journal = {The Journal of Marketing},
+	volume = {17},
+	number = 3,
+	month = JAN,
+	year = 1953,
+	pages = {273--277}
+}
+
+@article{Jung59RetailGravTrue,
+	author = {Allen F.~Jung},
+	title = {Is {R}eilly's law of retail gravitation always true?},
+	journal = {The Journal of Marketing},
+	volume = {24},
+	number = 2,
+	month = OCT,
+	year = 1959,
+	pages = {62--63}
+}
+
+%%%%%%%%%%%%%%%%%%% Flow Sampling %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Duffield05Flow,
+	author = {Nick Duffield and Carsten Lund and Mikkel Thorup},
+	title = {Estimating flow distributions from sampled flow statistics},
+	journal = {{IEEE/ACM} Trans. Net.},
+	volume = {13},
+	number = {5},
+	pages = {933--946},
+	year = {2005}
+}
+
+@article{Hohn06Inversion,
+    author = {Nicholas Hohn and Darryl Veitch},
+    title = {Inverting Sampled Traffic},
+    journal = {IEEE/ACM Trans. Net.},
+    volume = {14},
+    number = {1},
+    pages = {68--80},
+    month = {February},
+    year = {2006}
+}
+
+@article{Tune11DSjournal,
+	author = {Paul Tune and Darryl Veitch},
+	title = {Fisher Information in Flow Size Distribution Estimation},
+	journal = {IEEE Trans. Info. Theory},
+	volume = {57},
+	number = {10},
+	pages = {7011--7035},
+	month = {October},
+	year = {2011}
+}
+
+
+%%%%%%%%%%%%%%%%%%% Matrix Completion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{CandesRecht08MtxComp,
+	author = {Emmanuel Candes and Benjamin Recht},
+	title = {Exact matrix completion via convex optimization},
+	journal = {Found. of Comput. Math.},
+	volume = 9,
+	pages = {717--772},
+	year = 2008
+}
+
+@article{CandesTao09MtxComp,
+	author = {Emmanuel Candes and Terence Tao},
+	title = {The power of convex relaxation: {N}ear-optimal matrix completion},
+	journal = IEEETT,
+	volume  = 56,
+	number = 5,
+	month = MAY,
+	year = 2010,
+	pages = {2053--2080}
+}
+
+@article{CandesPlan09MtxNoise,
+	author = {Emmanuel Candes and Yaniv Plan},
+	title = {Matrix completion with noise},
+	journal = {Proc. IEEE},
+	volume = 98,
+	number = 6,
+	month = JUN,
+	year = 2010,
+	pages = {925--936}
+}
+
+@article{Recht07MtxComp,
+	author = {Benjamin Recht and Maryam Fazel and Pablo A. Parrilo},
+	title = {Guaranteed minimum--rank solutions of linear matrix equations via nuclear norm minimization},
+	journal = {SIAM Review},
+	volume = {52},
+	number = {3},
+	year = 2010,
+	pages = {471--501}
+}
+
+%%%%%%%%%%%%%%%%%%% Routing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Applegate03Oblivious,
+	author = {David Applegate and Edith Cohen},
+	title = {Making intra-domain routing robust to changing and uncertain traffic demands: {U}nderstanding fundamental 
+		tradeoffs},
+	booktitle = {ACM SIGCOMM},
+	location = {Karlsruhe, Germany},
+	month = AUG,
+	year = {2003},
+	pages = {313--324}
+}
+
+@inproceedings{Zhang05Valiant,
+	 author = {Rui Zhang-Shen and Mick McKeown},
+	 title = {Designing a predictable {I}nternet backbone with {V}aliant load-balancing},
+	 booktitle = {Proceedings of the 13th International Conference on Quality of Service (IWQoS)},
+ 	 year = {2005},
+	location = {Passau, Germany},
+ 	pages = {178--192}
+} 
+%%%%%%%%%%%%%%%%%%% Direct Measurement of TMs %%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Papagiannaki04Distributed,
+	author = {Konstantina Papagiannaki and Nina Taft and Anukool Lakhina},
+	title = {A Distributed Approach to Measure {IP} Traffic Matrices},
+	booktitle = {IMC '04},
+	month = OCT,
+	year = 2004,
+	location = {Taormina, Sicily},
+	pages = {161--174}
+}
+
+%%%%%%%%%%%%%%%%%%% Future of TMs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Varghese03Measure,
+	author = {George Varghese and Christian Estan},
+	title = {The Measurement Manifesto},
+	booktitle = {Hot{N}ets-II},
+	month = NOV,
+	year = {2003}
+}
+
+%%%%%%%%%%%%%%%%%%%%%% Misc References %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Misc{NetFlow,
+	howpublished = {Cisco NetFlow},
+	note = {http://www.cisco.com/go/netflow}
+}
+
+@techreport{SNMP,
+	author = {Jeffrey D. Case and Mark Fedor and Martin L.~Schoffstall and James R.~Davin},
+	title = {A simple network management protocol {(SNMP)}},
+	institution = {IETF},
+	number = {RFC 1157},
+	month = MAY,
+	year = 1990,
+	note = {http://www.ietf.org/rfc/rfc1157.txt}
+}
+
+@book{Stewart98MtxVol1,
+	author = {Gilbert W.~Stewart},
+	title = {Matrix algorithms {V}olume 1: {B}asic decompositions},
+	publisher = {SIAM},
+	year = {1998}
+}
+
+@book{Cover06InfoTheory,
+    author = {Thomas M. Cover and Joy A. Thomas},
+    title = {Elements of Information Theory},
+    edition = {2nd},
+    publisher = {John Wiley and Sons, Inc.},
+    year = {2006}
+}
+
+@article{Deming40IPF,
+	author = {W. Edwards Deming and Frederick F. Stephan},
+	title = {On a least squares adjustment of a sampled frequency table when the expected marginal totals are known},
+	journal = {Ann. Math. Stat},
+	volume = 11,
+	number = 4,
+	year = 1940,
+	pages = {427--444}
+}
+
+@book{Boyd04Opt,
+    author = {Stephen Boyd and Lloyd Vandenberghe},
+    title = {Convex Optimization},
+    publisher = {Cambridge University Press},
+    year = {2004}
+}
+
+@book{Rockafellar70Convex,
+	author = {R. Tyrrell Rockafellar},
+	title = {Convex Analysis},
+	series = {Princeton Landmarks in Mathematics and Physics},
+	publisher = {Princeton University Press},
+	year = {1970}
+}
+
+@book{Vazirani03Approx,
+	author = {Vijay V.~Vazirani},
+	title = {Approximation Algorithms},
+	publisher = {Springer},
+	year = {2003}
+}
+
+@article{DonohoCompressed06,
+		author = {David Donoho},
+		title = {Compressed sensing},
+		journal = {IEEE Trans. Info. Theory},
+		volume = {52},
+		number = {4},
+		pages = {1289--1306},
+		month = {April},
+		year = {2006}
+}
+
+@article{CandesTaoCS06,
+		author = {Emmanuel Candes and Terrence Tao},
+		title = {Near optimal signal recovery from random projections: {U}niversal
+						encoding strategies?},
+		journal = {IEEE Trans. Info. Theory},
+		volume = {52},
+		number = {12},
+		pages = {5406--5425},
+		month = {December},
+		year = {2006}
+}
+
+@inproceedings{Chistov84NPRank,
+	author = {A. L. Chistov and D. Yu},
+	title = {Complexity of quantifier elimination in the theory of algebraically closed fields},
+	booktitle = {Proc. 11th Symp. Math. Foundations of Comp. Science},
+	volume = {176},
+	series = {Lecture Notes in Computer Science},
+	publisher = {Springer},
+	year = 1984,
+	pages = {17--31}
+}
+
+@phdthesis{Fazel02Rank,
+	author = {Maryam Fazel},
+	title = {Matrix Rank Minimization with Applications},
+	school = {Stanford University},
+	year = {2002}
+}
+
+@article{Sinkhorn67Balance,
+	author = {Richard Sinkhorn and Paul Knopp},
+	title = {Concerning Nonnegative Matrices and Doubly Stochastic Matrices},
+	journal = {Pacific Journal of Mathematics},
+	volume = {21},
+	number = {2},
+	year = 1967
+}
+
+@article{Dempster77EM,
+	author = {A. P. Dempster and N. M. Laird and D. B. Rubin},
+	title = {Maximum likelihood from incomplete data via the {EM} algorithm (with
+			 discussion)},
+	journal = {Journal of the Royal Statistical Society B},
+	volume = {39},
+	number = {1},
+	pages = {1--38},
+	year = {1977}
+}
+
+@article{Lange95EMNewton,
+	author = {Kenneth Lange},
+	title = {A gradient algorithm locally equivalent to the {EM} algorithm},
+	journal = {J. R. Statist. Soc. B},
+	volume = {57},
+	number = {2},
+	year = {1995},
+	pages = {425--437}
+}
+
+@book{McLachlanEM08,
+	author = {Geoffrey J. McLachlan and Thriyambakam Krishnan},
+	title = {The EM Algorithm and Extensions},
+	edition = {2nd},
+	publisher = {Wiley Interscience},
+	year = {2008}
+}
+
+@article{ChenDonohoAtomic98,
+		author = {Scott Chen and David Donoho and Michel Saunders},
+		title = {Atomic decomposition by basis pursuit},
+		journal = {J.~Sci.~Computing},
+		volume = {20},
+		number = {1},
+		pages = {33--61},
+		year = {1998}
+}
+
+@book{McCullagh89GenLin,
+	author = {Peter McCullagh and John A.~Nelder},
+	title = {Generalized Linear Models},
+	series = {Monographs on Statistics and Applied Probability},
+	edition = {2nd},
+	publisher = {Chapman and Hall},
+	year = 1989
+}
+
+@book{Marshall79Majorization,
+	author = {Albert W. Marshall and Ingram Olkin},
+	title = {Inequalities: {T}heory of Majorization and its Applications},
+	publisher = {Academic},
+	location = {New York},
+	year = {1979}
+}
+
+@book{Kapur92MaxEnt,
+	author = {Jagat Narain Kapur and Hiremaglur K. Kesavan},
+	title = {Entropy Optimization Principles with Applications},
+	publisher = {Academic Press},
+	year = 1992
+}
+
+@article{Feder86MaxEntMDL,
+	author = { Meier Feder},
+	title = {Maximum entropy as a special case of the minimum description length criterion},
+	journal = {IEEE Trans. Info. Theory}, 
+	year = {1986},
+	month = NOV,
+	volume = {32},
+	number = {6},
+	pages = {847--849}
+}
+
+@article{Joe85Contingency,
+	author = {Harry Joe},
+	title = {An Ordering of Dependence for Contingency Tables},
+	journal = {Linear Algebra and Its Applications},
+	volume = 70,
+	pages = {89--103},
+	month = OCT,
+	year = {1985},
+}
+
+@article{Rissanen81Universal,
+	author = {Jorma Rissanen and Glen G.~{Langdon Jr}},
+	title = {Universal Modeling and Coding},
+	journal = {IEEE Trans. Info. Theory},
+	volume = 27,
+	number = 1,
+	month = JAN,
+	year = 1981,
+	pages = {12--23}
+}
+
+@article{Rissanen86MDL,
+	author = {Jorma Rissanen},
+	title = {Stochastic Complexity and Modeling},
+	journal = {Ann. Statist.},
+	volume = 14,
+	number = 3,
+	month = SEP,
+	year = 1986,
+	pages = {1080--1100}
+}
+
+
+@techreport{Donoho02MKCE,
+    	author = {David L. Donoho},
+    	title = {The {K}olmogorov Sampler},
+    	institution = {Department of Statistics, Stanford University},
+    	month = JAN,
+    	year = {2002}
+}
+
+@inproceedings{Balakrishnan04Sinkhorn,
+	author = {Hamsa Balakrishnan and Inseok Hwang and Claire J.~Tomlin},
+	title = {Polynomial Approximation Algorithms for Belief Matrix Maintenance in Identity Management},
+	booktitle = {43rd IEEE Conference on Decision and Control},
+	month = DEC,
+	year = 2004,
+	pages = {4874--4879}
+}
+
+@inproceedings{Lee00NonNegMtx,
+    	author = {Daniel D. Lee and H. Sebastian Seung},
+    	title = {Algorithms for Non-negative Matrix Factorization},
+    	booktitle = {NIPS},
+    	year = {2000},
+    	pages = {556--562},
+}
+
+@techreport{Baron11MCMC,
+	author = {Dror Baron and Tsachy Weissman},
+	title = {An {MCMC} approach to universal lossy compression of analog sources},
+	note = {submitted for publication and arXiV preprint arXiV:1107.2972},
+	year = {2011}
+}
+
+@article{Barron91MinCompEst,
+	author = {Andrew R.~Barron and Thomas M.~Cover},
+	title = {Minimum complexity density estimation},
+	journal = IEEETT,
+	year = {1991},
+	month = JUL,
+	volume = {37},
+	number = {4},
+	pages = {1034 -1054},
+}
+
+@article{Rissanen83Int,
+	author = {Jorma Rissanen},
+	title = {A Universal Prior for Integers and Estimation by Minimum Description Length},
+	journal = {Ann. Statist.},
+	volume = {11},
+	number = {2},
+	year = {1983},
+	pages = {416--431}
+}
+
+@article{Kosaraju99Compress,
+	author = {S.~Rao Kosaraju and Giovanni Manzini},
+	title = {Compression of Low Entropy Strings with {L}empel-{Z}iv algorithms},
+	journal = {SIAM J.~Computing},
+	volume = {29},
+	numer = {3},
+	year = {1999},
+	pages = {893--911}
+}
+
+@article{Manzini01BWT,
+	author = {Giovanni Manzini},
+	title = {An Analysis of the {B}urrows--{W}heeler Transform},
+	journal = {Journal of the {ACM}},
+	volume = {48},
+	number = {2},
+	month = MAY,
+	year = {2001},
+	pages = {407--430}
+}
+
+@techreport{Tune12MaxEnt,
+	author = {Paul Tune},
+	title = {Matrix Inference via Maximum Entropy},
+	institution = {School of Mathematical Sciences, University of Adelaide},
+	year = {2012}
+}
+
+@incollection{Tune13Primer,
+	author = {Paul Tune and Matthew Roughan},
+	title = {Internet traffic matrices: {A} Primer},
+	editor = {Hamed Haddadi and Oliver Bonaventure},
+	booktitle = {Recent Advances in Networking, Vol.~1},
+	publisher = {ACM SIGCOMM},
+	month = AUG,
+	year = {2013}
+}
+
+@article{Markowitz52Portfolio,
+	author = {Harry Markowitz},
+     	title = {Portfolio Selection},
+	journal = {The Journal of Finance},
+     	volume = {7},
+     	number = {1},
+     	pages = {77--91},
+	month = MAR,
+     	year = {1952}
+}
+
+@article{Fienberg70IPF,
+	author = {Stephen E.~Fienberg},
+	title = {An Iterative Procedure for Estimation in Contingency Tables},
+	journal = {Ann. Math. Stat.},
+	volume = {41},
+	number = {3},
+	pages = {907--917},
+	year = {1970}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%% Stochastic Traffic Engineering %%%%%%%%%%%%%%%%%%%%%%%%
+@article{Mitra05STE,
+ 	author = {Debasis Mitra and Qiong Wang},
+ 	title = {Stochastic traffic engineering for demand uncertainty and risk-aware network revenue management},
+ 	journal = IEEETON,
+ 	volume = {13},
+ 	number = {2},
+ 	month = APR,
+ 	year = {2005},
+ 	pages = {221--233}
+} 
+
+%%%%%%%%%%%%%%%%%%%%%%% Data Sets %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Misc{Abilene,
+	author = {NLANR},
+	howpublished = {Abilene Trace Data},
+	note = {\url{http://pma.nlanr.net/Special/ipls3.html}}
+}
+
+@article{GEANT,
+	author = {Steve Uhlig and Bruno Quoitin and Jean Lepropre and Simon Balon},
+	title = {Providing Public Intradomain Traffic Matrices to the Research Community},
+	journal = {Computer Communication Review},
+	volume = {36},
+	number = {1},
+	month = JAN,
+	year = {2006},
+	pages = {83--86}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%% Routing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Fortz00Cost,
+  	author = {Bernard Fortz and Mikkel Thorup},
+ 	title = {Optimizing {OSPF/IS--IS} Weights in a Changing World},
+  	journal = IEEEJSAC,
+	volume = 20,
+	number = 4,
+	month = MAY,
+  	year = {2002},
+  	pages = {756--767}
+}
+
+
+@article{Tao97DC,
+	author = {Pham Dinh Tao and Le Thi Hoai An},
+	title = {Convex analysis approach to {DC} (Difference of Convex functions) Programming: {T}heory, Algorithms and 
+		Applications},
+	journal = {Acta Mathematica Vietnamica}, 
+	volume = {22},
+	number = {1}, 
+	year = 1997,
+	pages = {289--355}
+} 
+
+@book{Watkins02MtxComp,
+	author = {David S. Watkins},
+	title = {Fundamentals of Matrix Computations},
+	publisher = {Wiley-Interscience},
+	edition = {2nd},
+	year = {2002}
+}
+
+%%%%%%%%%%%%%%%%%%%%% Misc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@book{Box87Model,
+	author = {George E.~P.~Box and Norman R.~Draper},
+	title = {Empirical Model-Building and Response Surfaces},
+	publisher = {Wiley},
+	year = 1987
+}
+
+@article{Knight11Topology,
+	author = {Simon Knight and Hung X.~Nguyen and Nicholas Falkner and Rhys Bowden and Matthew Roughan},
+	title = {The {I}nternet Topology Zoo},
+	journal = IEEEJSAC,
+	year = {2011},
+	volume = {29},
+	number = {9},
+	pages = {1765--1775},
+}
+
+@article{Liang06FastOD,
+	author = {Gang Liang and Bin Yu and Nina Taft},
+	title = {A Fast Lightweight Approach to Origin-Destination {IP} Traffic Estimation using Partial Measurements},
+	journal = IEEETON,
+	volume = {14},
+	month = JUN,
+	year = 2006,
+	pages = {2634--2648}
+}
+
+@techreport{Tune14SensitivityTech,
+	author = {Paul Tune and Matthew Roughan},
+	title = {Network-Design Sensitivity Analysis},
+	institution = {School of Mathematical Sciences, University of Adelaide},
+	month = JAN,
+	year = 2014
+}
+
+@inproceedings{Tune14Sensitivity,
+	author = {Paul Tune and Matthew Roughan},
+	title = {Network-Design Sensitivity Analysis},
+	booktitle = {ACM SIGMETRICS 2014},
+	month = JUN,
+	year = 2014,
+	location = {Austin, TX, USA},
+	pages = {449--461}
+}
+
+@inproceedings{Eriksson13RiskRoute,
+ 	author = {Brian Eriksson and Ramakrishnan Durairajan and Paul Barford},
+ 	title = {Risk{R}oute: {A} Framework for Mitigating Network Outage Threats},
+	booktitle = {CoNEXT '13},
+	month = DEC,
+	year = {2013},
+	location = {Santa Barbara, California, USA},
+ 	pages = {405--416},
+} 
+
+@article{Pukelsheim14IPF,
+	author = {Friedrich Pukelsheim},
+	title = {Biproportional scaling of matrices and the iterative proportional fitting procedure},
+	journal = {Ann. Oper. Res.},
+	volume = {215},
+	number = 1,
+	pages = {269--283},
+	month = APR,
+	year = {2014}
+}
+
+@inproceedings{Hua12gEEC,
+	author = {Nan Hua and Ashwin Lall and Baochun Li and Jun Xu},
+	title = {Towards Optimal Error-Estimating Codes through the Lens of Fisher Information Analysis},
+	booktitle = {ACM SIGMETRICS '12},
+	month = JUN,
+	year = {2012},
+	location = {London, England, UK},
+	pages = {125--136}
+}

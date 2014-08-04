@@ -6,6 +6,7 @@
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage[pdftex]{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue,pdfauthor={Paul Tune},pdftitle={Fisher Information for Error Estimation Codes}]{hyperref}
 
 % horizontal margins: 1.0 + 6.5 + 1.0 = 8.5
 \setlength{\oddsidemargin}{0.0in}
@@ -31,32 +32,73 @@
 \numberwithin{table}{section}
 \numberwithin{figure}{section}
 
-% begin of personal macros
-\newcommand{\half}{{\textstyle \frac{1}{2}}}
+%------- My common Definitions
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\ben}{\begin{equation*}}
+\newcommand{\een}{\end{equation*}}
+\newcommand{\ba}{\begin{eqnarray}}
+\newcommand{\ea}{\end{eqnarray}}
+\newcommand\Var {{\rm Var}}
+\def\Cov {\makebox{Cov }}
+\newcommand{\Z}{Z\!\!\!Z}
+
+%%%%%%%%%%%%%%%%% definitions for this document
+\def\mus{{$\mu$s}}         % microseconds
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}%[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+% MATH -----------------------------------------------------------
+\newcommand{\id}[1]{\mathbf{I}_{#1}}
+\newcommand{\mnull}{\mathbf{0}}
+\newcommand{\vnull}[2]{\mathbf{0}_{#1 \times #2}}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\mset}[1]{\lbrack #1\rbrack}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\Complex}{\mathbb C}
+\newcommand{\Integer}{\mathbb Z}
+\newcommand{\Natural}{\mathbb N}
+\newcommand{\Sphere}{\mathbb S}
 \newcommand{\eps}{\varepsilon}
-\newcommand{\myth}{\vartheta}
-\newcommand{\myphi}{\varphi}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\I}{\boldsymbol{\mathcal{I}}_{\vth}}
+\newcommand{\tr}{\mathbf{tr}}
+\newcommand{\adj}{\mathrm{adj}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\E}[2][]{\mathbb E_{#1} \!\left[ #2 \right]} % optional extra parameter #1
+\newcommand{\bEu}[1]{\mathbf{e}_{#1}}
+\newcommand{\bin}[2]{\text{Bin}(#1,#2)}
+\newcommand{\Count}{1}
+\newcommand{\constr}{\mathbf{G}}
+\newcommand{\ind}{\mathbbm 1}
+\newcommand{\ones}[1]{\mathbf{1}_{#1}}
+\newcommand{\veth}{\boldsymbol{\hat \theta}}
+\newcommand{\vbth}{\boldsymbol{\bar \theta}}
+\newcommand{\iset}[1]{\lbrack #1 \rbrack}
+\newcommand{\bxi}[1]{\mathbf{x}^{(#1)}}
+\newcommand{\bXi}[1]{\mathbf{X}^{(#1)}}
+\newcommand{\iomega}[1]{\omega^{(#1)}}
+\newcommand{\bdi}[1]{\mathbf{d}^{(#1)}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+% ----------------------------------------------------------------
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\newcounter{tempcnt}
+\renewcommand{\arraystretch}{1.2}
+%-----------------------------------------------------------------
 
-\newcommand{\IN}{\mathbb{N}}
-\newcommand{\IZ}{\mathbb{Z}}
-\newcommand{\IQ}{\mathbb{Q}}
-\newcommand{\IR}{\mathbb{R}}
-\newcommand{\IC}{\mathbb{C}}
-\newcommand{\Real}[1]{\mathrm{Re}\left({#1}\right)}
-\newcommand{\Imag}[1]{\mathrm{Im}\left({#1}\right)}
+\def\gap{\vspace{10pt}\noindent}
+\def\naive{na\"{\i}ve\ }
 
-\newcommand{\norm}[2]{\|{#1}\|_{{}_{#2}}}
-\newcommand{\abs}[1]{\left|{#1}\right|}
-\newcommand{\ip}[2]{\left\langle {#1}, {#2} \right\rangle}
-\newcommand{\der}[2]{\frac{\partial {#1}}{\partial {#2}}}
-\newcommand{\dder}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
 
-\newcommand{\nn}{\mathbf{n}}
-\newcommand{\xx}{\mathbf{x}}
-\newcommand{\uu}{\mathbf{u}}
 
-\newcommand{\junk}[1]{{}}
-
+\def\bgamma{\boldsymbol{\gamma}}
 % set two lengths for the includegraphics commands used to import the plots:
 \newlength{\fwtwo} \setlength{\fwtwo}{0.45\textwidth}
 % end of personal macros
@@ -65,7 +107,7 @@
 \DeclareGraphicsExtensions{.jpg}
 
 \begin{center}
-\textbf{\Large Fisher Information for Data Streaming Algorithms} \\[6pt]
+\textbf{\Large Fisher Information for Error Estimation Codes} \\[6pt]
   Paul Tune \\[6pt]
   School of Mathematical Sciences,\\
   University of Adelaide, Australia  \\[6pt]
@@ -73,9 +115,9 @@
 \end{center}
 
 \begin{abstract}
-In this technical report, we analyze the Fisher information of the Error Estimating Codes (EEC) and the 
-Enhanced Tug of War (EToW) when the packet is sampled with and without replacement, on the case
-when both algorithms have immunity.
+In this technical report, we analyze the Fisher information of the generalized Error Estimating Codes (EEC) when the packet is sampled with 
+and without replacement, in the case when the algorithm has immunity. We also compute the best bound possible obtained from looking 
+directly at the Fisher information of transmitted bits.
 \end{abstract}
 
 \subparagraph{Key words.} Error estimation codes, Fisher information, sampling with and without replacement,
@@ -85,10 +127,50 @@ sketching.
 \section{Introduction}
 
 
+\section{Generalized EEC (gEEC)}
+
+\subsection{Sampling with vs. without replacement}
+
+Intuitively, it may seem that if one samples bits from the packet \textit{without replacement}, there is additional information in the subsketches 
+due to the non-avoidance property of the sampling method. However, our aim in this section is to show that there is absolutely no difference
+in the information content if \textit{sampling with replacement} was used instead.
+
+
+\subsection{Computation of Fisher information}
+
+Here we show a fast way of computing the Fisher information for gEEC, based on \cite[Lemma 1]{Hua12gEEC}. Let $\ast_K$ denote the circular 
+convolution operation truncated at $K$
+and $\bgamma(\theta,0) = [1,0,\cdots,0]$. Then, 
+\be
+\bgamma(\theta,\ell) = \bgamma(\theta,\ell-1) \ast_K m(\theta),
+\ee
+where $m(\theta) := [1-\theta,\theta/2,\cdots 0 \cdots,\theta/2]$. Clearly, $\bgamma'(\theta,0) = [0,0,\cdots,0]$. Similarly, by the chain rule, since 
+the circular convolution is a linear operation (multiplication by a circulant matrix),
+\be
+\bgamma'(\theta,\ell) := \bgamma'(\theta,\ell-1) \ast_K m(\theta) + \bgamma(\theta,\ell-1) \ast_K m'(\theta),
+\ee
+where $m'(\theta) :=  [1,1/2,\cdots 0 \cdots,1/2]$. 
+
+The Fisher information is simply
+\be
+J(\theta,\ell) = \sum_{k=0}^{K-1} J_k(\theta,\ell)
+\ee
+with
+\be
+J(\theta,\ell) := 
+\begin{cases}
+\frac{(\gamma'_k(\theta,\ell))^2}{\gamma_k(\theta,\ell)}, & \gamma_k(\theta,\ell) > 0,\\
+0, & \text{otherwise}.
+\end{cases}
+\ee
+We can compute these relations via publicly available circular convolution routines. Computational complexity of both $\bgamma(\theta,\ell)$ 
+and $\bgamma'(\theta,\ell)$ are $O(K \log K)$ respectively.
+
  
 \appendix
 
-
+\bibliography{TuneBib}
+\bibliographystyle{abbrv}
 
 \end{document}
 
