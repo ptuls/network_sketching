@@ -6,7 +6,8 @@
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage[pdftex]{graphicx}
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue,pdfauthor={Paul Tune},pdftitle={Fisher Information for Error Estimation Codes}]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue,pdfauthor={Paul Tune},pdftitle={Fisher Information Analysis of Error 
+Estimation Codes}]{hyperref}
 
 % horizontal margins: 1.0 + 6.5 + 1.0 = 8.5
 \setlength{\oddsidemargin}{0.0in}
@@ -96,7 +97,29 @@
 \def\gap{\vspace{10pt}\noindent}
 \def\naive{na\"{\i}ve\ }
 
+\def\diag{\text{diag}}
 
+\def\bA{\mathbf{A}}
+\def\bC{\mathbf{C}}
+\def\bD{\mathbf{D}}
+\def\bE{\mathbf{E}}
+\def\bH{\mathbf{H}}
+\def\bM{\mathbf{M}}
+\def\bN{\mathbf{N}}
+\def\bP{\mathbf{P}}
+\def\bW{\mathbf{W}}
+\def\bU{\mathbf{U}}
+\def\bQ{\mathbf{Q}}
+\def\bV{\mathbf{V}}
+\def\bF{\mathbf{F}}
+\def\bS{\mathbf{S}}
+\def\bT{\mathbf{T}}
+\def\bX{\mathbf{X}}
+\def\bY{\mathbf{Y}}
+\def\bZ{\mathbf{Z}}
+\def\bB{\mathbf{B}}
+
+\def\bp{\mathbf{p}}
 
 \def\bgamma{\boldsymbol{\gamma}}
 % set two lengths for the includegraphics commands used to import the plots:
@@ -107,7 +130,7 @@
 \DeclareGraphicsExtensions{.jpg}
 
 \begin{center}
-\textbf{\Large Fisher Information for Error Estimation Codes} \\[6pt]
+\textbf{\Large Fisher Information Analysis of Error Estimation Codes} \\[6pt]
   Paul Tune \\[6pt]
   School of Mathematical Sciences,\\
   University of Adelaide, Australia  \\[6pt]
@@ -124,7 +147,81 @@ directly at the Fisher information of transmitted bits.
 sketching.
 
 
-\section{Introduction}
+%\section{Introduction}
+
+\section{Fisher Information from Direct Samples}
+
+Our model is a two level model: we start from the bits \textit{sampled} from a packet, transmitted across a channel with \textit{bit flip probability} 
+$0 < \theta < 1$ and received at the decoder. In this section we consider two important issues:
+\begin{enumerate}
+\item what is the total Fisher information about $\theta$ from the samples?
+\item what is the difference in Fisher information when bits from the packet are sampled \textit{with} versus \textit{without} replacement?
+\end{enumerate}
+
+To answer both questions, we have to develop a framework. Assume $\ell$ bits were sampled from the packet. At this point, we do not specify
+the sampling method. Let $\Omega$ be the ordered set of the $2^\ell$ possible bit sequences obtained from sampling from the packet. The
+lexicographical ordering starts from $0,1,\cdots,2^{\ell}-1$, with its binary representation corresponding to $\{00\ldots0, 00\ldots1,\cdots,
+11\ldots1\}$. The associated probability mass function (p.m.f.) of the members of the ordered set is denoted by $p_i$, $i = 0,1,\cdots,
+2^{\ell}-1$. For example, the probability the all-zero sequence $00\ldots0$ was drawn from the packet is given by $p_0$, while the all ones 
+sequence $11\ldots1$ was drawn is $p_{2^\ell-1}$.
+
+Let $X \in \Omega$ be the sampled sequence of bits. These bits are transmitted across the channel and are subjected to bit flip errors due to the
+action of the channel. Let the random variable $Y$ denote the received sequence of bits at the decoder. Clearly, $Y \in \Omega$. For each bit 
+sequence, we can define a $2^\ell$ by $2^\ell$ matrix $\bC(\theta)$ with entries $c_{i,j}(\theta)$ such that
+\begin{align}
+\nonumber
+c_{i,j}(\theta) &:= \Pr(Y= j\,|\,X=i)\\
+\label{eq:channel_error}
+&\ = \theta^{h(i,j)} (1-\theta)^{\ell - h(i,j)},
+\end{align}
+where $h(i,j)$ is the Hamming weight between $i$ and $j$ (in their respective binary representations). The differential of each entry with
+respect to $\theta$ is
+\begin{align}
+\nonumber
+c'_{i,j}(\theta) &= \frac{d}{d\theta} c_{i,j}(\theta)\\
+\label{eq:channel_error_diff}
+&= h(i,j) \theta^{h(i,j)-1} (1-\theta)^{\ell - h(i,j)} - (\ell - h(i,j)) \theta^{h(i,j)} (1-\theta)^{\ell - h(i,j)-1},
+\end{align}
+
+Let $\bp = [p_0,p_1,\cdots,p_{2^\ell-1}]$.
+The joint probability of $(X,Y)$ is the matrix $\bB(\theta) = \diag(\bp) \bC(\theta)$.
+
+%Let $[\bA]_{\ast,j}$ be column $j$ of the matrix $\bA$ and $\ones$ be a column vector of ones. 
+Then, letting $f_{i,j}(\theta) := \Pr(X=i,Y=j;\theta)$ and $f_{j}(\theta) := \Pr(Y=j;\theta)$,
+\begin{align*}
+f_j(\theta) &= \sum_{i=0}^{2^\ell-1} b_{i,j}(\theta)\\
+&= \sum_{i=0}^{2^\ell-1} p_i c_{i,j}(\theta)
+\end{align*}
+
+Let $J(X,Y;\theta)$ be the Fisher information of the joint random variables $(X,Y)$. This is the best we can do since in this case, we know what
+was sent through the channel in addition to what was received at the decoder. Note that the Fisher information is constrained, since there is
+an inequality constraint on the parameter $\theta$. However, since $\theta$ does not lie on the boundary of the interval $[0,1]$, this does not
+add additional information, so the Fisher information remains the same as the case when there is no constraint on $\theta$ 
+\cite{Gorman90CRB}.
+
+The Fisher information in this case is
+\begin{align}
+\nonumber
+J(X,Y;\theta) &= \sum_{i,j} f_{i,j}(\theta) \Big(\frac{d}{d\theta}\log f_{i,j}(\theta)\Big)^2\\
+\nonumber
+&= \sum_{i,j} p_i c_{i,j}(\theta) \frac{p^2_i c'^2_{i,j}(\theta)}{p^2_i c^2_{i,j}(\theta)}\\
+\label{eq:FI_joint}
+& = \sum_{i,j}  p_i\frac{c'^2_{i,j}(\theta)}{c_{i,j}(\theta)}
+\end{align}
+On the other hand,
+\begin{align}
+\nonumber
+J(Y;\theta) &= \sum_{j}  f_{j}(\theta) \Big(\frac{d}{d\theta}\log f_{j}(\theta)\Big)^2\\
+\label{eq:FI_received}
+&= \sum_{j} \Big(\sum_i p_i c'_{i,j}(\theta) \Big)^2 \Big(\sum_i p_i c_{i,j}(\theta) \Big)^{-1} 
+\end{align}
+By the data processing inequality for Fisher information \cite{Zamir98DPI}, since $\theta \to (X,Y) \to Y$ forms a Markov chain, so
+$J(X,Y;\theta) \ge J(Y;\theta)$. 
+
+Now, to answer the second question, we analyze $J(X,Y;\theta)$ further. Let $p^{(wr)}_i$ be the probability sequence $i$ was drawn
+with replacement from the packet, while $p^{(wor)}_i$ represents the probability it was drawn from the packet without replacement. Let 
+$J(X^{(wr)},Y;\theta)$ and $J(X^{(wor)},Y;\theta)$ be the Fisher information when the bits were drawn with and without replacement 
+respectively.
 
 
 \section{Generalized EEC (gEEC)}
@@ -138,22 +235,26 @@ in the information content if \textit{sampling with replacement} was used instea
 
 \subsection{Computation of Fisher information}
 
-Here we show a fast way of computing the Fisher information for gEEC, based on \cite[Lemma 1]{Hua12gEEC}. Let $\ast_K$ denote the circular 
-convolution operation truncated at $K$
-and $\bgamma(\theta,0) = [1,0,\cdots,0]$. Then, 
+Here we show a fast way of computing the Fisher information for gEEC, based on \cite[Lemma 1]{Hua12gEEC}. Thus, diagonalization of a 
+matrix is not required. The trick is to realize that $\bM(\theta)$ in \cite[Equation (26), Lemma 1]{Hua12gEEC} is a circular matrix, so multiplication 
+is equivalent to circular convolution.
+
+Let $\ast_K$ denote the circular convolution operation truncated at $K$ and $\bgamma(\theta,0) = [1,0,\cdots,0]$. Then, 
 \be
-\bgamma(\theta,\ell) = \bgamma(\theta,\ell-1) \ast_K m(\theta),
+\bgamma(\theta,\ell) = \bgamma(\theta,\ell-1) \ast_K M(\theta),
 \ee
-where $m(\theta) := [1-\theta,\theta/2,\cdots 0 \cdots,\theta/2]$. Clearly, $\bgamma'(\theta,0) = [0,0,\cdots,0]$. Similarly, by the chain rule, since 
+where $M(\theta) := [1-\theta,\theta/2,\cdots 0 \cdots,\theta/2]$.  Similarly, by the chain rule, since 
 the circular convolution is a linear operation (multiplication by a circulant matrix),
-\be
-\bgamma'(\theta,\ell) := \bgamma'(\theta,\ell-1) \ast_K m(\theta) + \bgamma(\theta,\ell-1) \ast_K m'(\theta),
-\ee
-where $m'(\theta) :=  [1,1/2,\cdots 0 \cdots,1/2]$. 
+\begin{align*}
+\bgamma'(\theta,\ell) &:= \frac{d}{d\theta} \bgamma(\theta,\ell)\\
+&= \bgamma'(\theta,\ell-1) \ast_K m(\theta) + \bgamma(\theta,\ell-1) \ast_K M'(\theta),
+\end{align*}
+where $M'(\theta) :=  [-1,1/2,\cdots 0 \cdots,1/2]$. Clearly, $\bgamma'(\theta,0) = [0,0,\cdots,0]$.
 
 The Fisher information is simply
 \be
 J(\theta,\ell) = \sum_{k=0}^{K-1} J_k(\theta,\ell)
+\label{eq:FI_gEEC}
 \ee
 with
 \be
@@ -164,7 +265,8 @@ J(\theta,\ell) :=
 \end{cases}
 \ee
 We can compute these relations via publicly available circular convolution routines. Computational complexity of both $\bgamma(\theta,\ell)$ 
-and $\bgamma'(\theta,\ell)$ are $O(K \log K)$ respectively.
+and $\bgamma'(\theta,\ell)$ are $O(K \log K)$ respectively, and since by \eqref{eq:FI_gEEC}, the Fisher information computation involves
+the summation of $K$ terms, the computation is dominated by the convolution operation, hence the total complexity is $O(K \log K)$.
 
  
 \appendix
