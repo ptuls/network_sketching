@@ -143,7 +143,7 @@ and without replacement, in the case when the algorithm has immunity. We also co
 directly at the Fisher information of transmitted bits.
 \end{abstract}
 
-\subparagraph{Key words.} Error estimation codes, Fisher information, sampling with and without replacement,
+\subparagraph{Keywords.} Error estimation codes, Fisher information, sampling with and without replacement,
 sketching.
 
 
@@ -154,13 +154,13 @@ sketching.
 Our model is a two level model: we start from the bits \textit{sampled} from a packet, transmitted across a channel with \textit{bit flip probability} 
 $0 < \theta < 1$ and received at the decoder. In this section we consider two important issues:
 \begin{enumerate}
-\item what is the total Fisher information about $\theta$ from the samples?
+\item what is the Fisher information about $\theta$ from directly received samples?
 \item what is the difference in Fisher information when bits from the packet are sampled \textit{with} versus \textit{without} replacement?
 \end{enumerate}
 
 To answer both questions, we have to develop a framework. Assume $\ell$ bits were sampled from the packet. At this point, we do not specify
 the sampling method. Let $\Omega$ be the ordered set of the $2^\ell$ possible bit sequences obtained from sampling from the packet. The
-lexicographical ordering starts from $0,1,\cdots,2^{\ell}-1$, with its binary representation corresponding to $\{00\ldots0, 00\ldots1,\cdots,
+lexicographical ordering starts from $\{0,1,\cdots,2^{\ell}-1\}$, with its binary representation corresponding to $\{00\ldots0, 00\ldots1,\cdots,
 11\ldots1\}$. The associated probability mass function (p.m.f.) of the members of the ordered set is denoted by $p_i$, $i = 0,1,\cdots,
 2^{\ell}-1$. For example, the probability the all-zero sequence $00\ldots0$ was drawn from the packet is given by $p_0$, while the all ones 
 sequence $11\ldots1$ was drawn is $p_{2^\ell-1}$.
@@ -185,19 +185,20 @@ c'_{i,j}(\theta) &= \frac{d}{d\theta} c_{i,j}(\theta)\\
 
 Let $\bp = [p_0,p_1,\cdots,p_{2^\ell-1}]$.
 The joint probability of $(X,Y)$ is the matrix $\bB(\theta) = \diag(\bp) \bC(\theta)$.
-
-%Let $[\bA]_{\ast,j}$ be column $j$ of the matrix $\bA$ and $\ones$ be a column vector of ones. 
 Then, letting $f_{i,j}(\theta) := \Pr(X=i,Y=j;\theta)$ and $f_{j}(\theta) := \Pr(Y=j;\theta)$,
 \begin{align*}
 f_j(\theta) &= \sum_{i=0}^{2^\ell-1} b_{i,j}(\theta)\\
-&= \sum_{i=0}^{2^\ell-1} p_i c_{i,j}(\theta)
+&= \sum_{i=0}^{2^\ell-1} p_i c_{i,j}(\theta).
 \end{align*}
 
+%Let $[\bA]_{\ast,j}$ be column $j$ of the matrix $\bA$ and $\ones$ be a column vector of ones. 
+
+
 Let $J(X,Y;\theta)$ be the Fisher information of the joint random variables $(X,Y)$. This is the best we can do since in this case, we know what
-was sent through the channel in addition to what was received at the decoder. Note that the Fisher information is constrained, since there is
-an inequality constraint on the parameter $\theta$. However, since $\theta$ does not lie on the boundary of the interval $[0,1]$, this does not
-add additional information, so the Fisher information remains the same as the case when there is no constraint on $\theta$ 
-\cite{Gorman90CRB}.
+was sent through the channel in addition to what was received at the decoder. As a side note, when deriving the Fisher information, all 
+derivations have to account for the inequality constraint on the parameter $\theta$. However, since $\theta$ does not lie on the boundary of the 
+interval $[0,1]$, this does not add additional information, so the Fisher information remains the same as the case when there is no constraint on 
+$\theta$ \cite{Gorman90CRB}.
 
 The Fisher information in this case is
 \begin{align}
@@ -206,14 +207,14 @@ J(X,Y;\theta) &= \sum_{i,j} f_{i,j}(\theta) \Big(\frac{d}{d\theta}\log f_{i,j}(\
 \nonumber
 &= \sum_{i,j} p_i c_{i,j}(\theta) \frac{p^2_i c'^2_{i,j}(\theta)}{p^2_i c^2_{i,j}(\theta)}\\
 \label{eq:FI_joint}
-& = \sum_{i,j}  p_i\frac{c'^2_{i,j}(\theta)}{c_{i,j}(\theta)}
+& = \sum_{i,j}  p_i\frac{c'^2_{i,j}(\theta)}{c_{i,j}(\theta)}.
 \end{align}
 On the other hand,
 \begin{align}
 \nonumber
 J(Y;\theta) &= \sum_{j}  f_{j}(\theta) \Big(\frac{d}{d\theta}\log f_{j}(\theta)\Big)^2\\
 \label{eq:FI_received}
-&= \sum_{j} \Big(\sum_i p_i c'_{i,j}(\theta) \Big)^2 \Big(\sum_i p_i c_{i,j}(\theta) \Big)^{-1} 
+&= \sum_{j} \Big(\sum_i p_i c'_{i,j}(\theta) \Big)^2 \Big(\sum_i p_i c_{i,j}(\theta) \Big)^{-1} .
 \end{align}
 By the data processing inequality for Fisher information \cite{Zamir98DPI}, since $\theta \to (X,Y) \to Y$ forms a Markov chain, so
 $J(X,Y;\theta) \ge J(Y;\theta)$. 
