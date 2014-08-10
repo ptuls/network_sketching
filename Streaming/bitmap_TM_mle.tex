@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+\usepackage{latexsym,amssymb,amsmath} % for \Box, \mathbb, split, etc.
+% \usepackage[]{showkeys} % shows label names
+\usepackage{cite} % sorts citation numbers appropriately
+\usepackage{path}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage[pdftex]{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue,pdfauthor={Paul Tune},pdftitle={MLE for Recovering the Traffic Matrix 
+with End-to-End Bitmap Measurements}]{hyperref}
+
+% horizontal margins: 1.0 + 6.5 + 1.0 = 8.5
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+% vertical margins: 1.0 + 9.0 + 1.0 = 11.0
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{13pt}
+\setlength{\textheight}{625pt}
+\setlength{\footskip}{24pt}
+
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\floatpagefraction}{0.90}
+
+\makeatletter
+\setlength{\arraycolsep}{2\p@} % make spaces around "=" in eqnarray smaller
+\makeatother
+
+% change equation, table, figure numbers to be counted inside a section:
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+
+%------- My common Definitions
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\ben}{\begin{equation*}}
+\newcommand{\een}{\end{equation*}}
+\newcommand{\ba}{\begin{eqnarray}}
+\newcommand{\ea}{\end{eqnarray}}
+\newcommand\Var {{\rm Var}}
+\def\Cov {\makebox{Cov }}
+\newcommand{\Z}{Z\!\!\!Z}
+
+%%%%%%%%%%%%%%%%% definitions for this document
+\def\mus{{$\mu$s}}         % microseconds
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}%[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+% MATH -----------------------------------------------------------
+\newcommand{\id}[1]{\mathbf{I}_{#1}}
+\newcommand{\mnull}{\mathbf{0}}
+\newcommand{\vnull}[2]{\mathbf{0}_{#1 \times #2}}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\mset}[1]{\lbrack #1\rbrack}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\Complex}{\mathbb C}
+\newcommand{\Integer}{\mathbb Z}
+\newcommand{\Natural}{\mathbb N}
+\newcommand{\Sphere}{\mathbb S}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\I}{\boldsymbol{\mathcal{I}}_{\vth}}
+\newcommand{\tr}{\mathbf{tr}}
+\newcommand{\adj}{\mathrm{adj}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\E}[2][]{\mathbb E_{#1} \!\left[ #2 \right]} % optional extra parameter #1
+\newcommand{\bEu}[1]{\mathbf{e}_{#1}}
+\newcommand{\bin}[2]{\text{Bin}(#1,#2)}
+\newcommand{\Count}{1}
+\newcommand{\constr}{\mathbf{G}}
+\newcommand{\ind}{\mathbbm 1}
+\newcommand{\ones}[1]{\mathbf{1}_{#1}}
+\newcommand{\veth}{\boldsymbol{\hat \theta}}
+\newcommand{\vbth}{\boldsymbol{\bar \theta}}
+\newcommand{\iset}[1]{\lbrack #1 \rbrack}
+\newcommand{\bxi}[1]{\mathbf{x}^{(#1)}}
+\newcommand{\bXi}[1]{\mathbf{X}^{(#1)}}
+\newcommand{\iomega}[1]{\omega^{(#1)}}
+\newcommand{\bdi}[1]{\mathbf{d}^{(#1)}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+% ----------------------------------------------------------------
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\newcounter{tempcnt}
+\renewcommand{\arraystretch}{1.2}
+%-----------------------------------------------------------------
+
+\def\gap{\vspace{10pt}\noindent}
+\def\naive{na\"{\i}ve\ }
+
+\def\diag{\text{diag}}
+
+\def\bA{\mathbf{A}}
+\def\bC{\mathbf{C}}
+\def\bD{\mathbf{D}}
+\def\bE{\mathbf{E}}
+\def\bH{\mathbf{H}}
+\def\bM{\mathbf{M}}
+\def\bN{\mathbf{N}}
+\def\bP{\mathbf{P}}
+\def\bW{\mathbf{W}}
+\def\bU{\mathbf{U}}
+\def\bQ{\mathbf{Q}}
+\def\bV{\mathbf{V}}
+\def\bF{\mathbf{F}}
+\def\bS{\mathbf{S}}
+\def\bT{\mathbf{T}}
+\def\bX{\mathbf{X}}
+\def\bY{\mathbf{Y}}
+\def\bZ{\mathbf{Z}}
+\def\bB{\mathbf{B}}
+
+\def\bp{\mathbf{p}}
+
+\def\bgamma{\boldsymbol{\gamma}}
+% set two lengths for the includegraphics commands used to import the plots:
+\newlength{\fwtwo} \setlength{\fwtwo}{0.45\textwidth}
+% end of personal macros
+
+\begin{document}
+\DeclareGraphicsExtensions{.jpg}
+
+\begin{center}
+\textbf{\Large MLE for Recovering the Traffic Matrix with End-to-End Bitmap Measurements} \\[6pt]
+  Paul Tune \\[6pt]
+  School of Mathematical Sciences,\\
+  University of Adelaide, Australia  \\[6pt]
+  paul.tune@adelaide.edu.au
+\end{center}
+
+\begin{abstract}
+In this technical report, we derive the maximum likelihood estimator to recover the traffic matrix when bitmaps were used to measure the 
+incoming and outgoing traffic of a network. This derivation applies to a single measurement interval.
+\end{abstract}
+
+\subparagraph{Keywords.} Bitmap, maximum likelihood estimator.
+
+
+%\section{Introduction}
+
+\section{MLE Derivation}
+
+ 
+\appendix
+
+\bibliography{TuneBib}
+\bibliographystyle{abbrv}
+
+\end{document}
+
