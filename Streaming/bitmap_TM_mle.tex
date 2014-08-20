@@ -28,6 +28,21 @@ with End-to-End Bitmap Measurements}]{hyperref}
 \setlength{\arraycolsep}{2\p@} % make spaces around "=" in eqnarray smaller
 \makeatother
 
+% use "autoref" the way I want
+%   autoref is nice because the text or brackets of a ref are part of link
+%   see http://tex.stackexchange.com/questions/36575/autorefs-inserted-text-has-not-the-correct-case
+%       http://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing
+%       http://www.tug.org/applications/hyperref/manual.html#TBL-23
+\def\algorithmautorefname{Algorithm}
+%\def\sectionautorefname{\S\!\!}
+%\def\subsectionautorefname{\S\!\!}
+\def\sectionautorefname{Section \!\!}
+\def\subsectionautorefname{Section \!\!}
+% from http://tex.stackexchange.com/questions/52410/how-to-use-the-command-autoref-to-implement-the-same-effect-when-use-the-comman
+\def\equationautorefname~#1\null{%
+  (#1)\null
+}
+
 % change equation, table, figure numbers to be counted inside a section:
 \numberwithin{equation}{section}
 \numberwithin{table}{section}
@@ -96,14 +111,19 @@ with End-to-End Bitmap Measurements}]{hyperref}
 
 \def\gap{\vspace{10pt}\noindent}
 \def\naive{na\"{\i}ve\ }
+\def\ie{\textit{i.e.,}}
+
 
 \def\diag{\text{diag}}
 
 \def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
 \def\bC{\mathbf{C}}
 \def\bD{\mathbf{D}}
 \def\bE{\mathbf{E}}
+\def\bG{\mathbf{G}}
 \def\bH{\mathbf{H}}
+\def\bJ{\mathbf{J}}
 \def\bM{\mathbf{M}}
 \def\bN{\mathbf{N}}
 \def\bP{\mathbf{P}}
@@ -117,10 +137,20 @@ with End-to-End Bitmap Measurements}]{hyperref}
 \def\bX{\mathbf{X}}
 \def\bY{\mathbf{Y}}
 \def\bZ{\mathbf{Z}}
-\def\bB{\mathbf{B}}
 
+\def\ba{\mathbf{a}}
+\def\bb{\mathbf{b}}
+\def\bc{\mathbf{c}}
 \def\bp{\mathbf{p}}
+\def\br{\mathbf{r}}
 
+\def\cA{\mathcal{A}}
+\def\cD{\mathcal{D}}
+\def\cI{\boldsymbol{\mathcal{I}}}
+\def\cL{\mathcal{L}}
+\def\cU{\mathcal{U}}
+
+\def\bpsi{\boldsymbol{\psi}}
 \def\bgamma{\boldsymbol{\gamma}}
 % set two lengths for the includegraphics commands used to import the plots:
 \newlength{\fwtwo} \setlength{\fwtwo}{0.45\textwidth}
@@ -144,13 +174,208 @@ incoming and outgoing traffic of a network. This derivation applies to a single 
 
 \subparagraph{Keywords.} Bitmap, maximum likelihood estimator.
 
+\section{Introduction}
 
-%\section{Introduction}
+In this report, we derive the MLE and Fisher information matrix when bitmaps are used in end-to-end measurements to infer the traffic matrix 
+(TM) \cite{Zhao05TM}.
 
 \section{MLE Derivation}
 
+We consider a TM in a single time interval $\Delta t$. This could be a few minutes, but what matters here is the volume of traffic 
+in a single interval. Let the $M \times N$ TM be denoted by $\bX \in \Real^{M \times N}$ with its row sums and column sums denoted by $\br$ and $\bc$, \ie
+\begin{align*}
+\sum_{j=1}^N x_{i,j} &= r_i,\ \forall i,\\
+\sum_{i=1}^M x_{i,j} &= c_j,\ \forall j.
+\end{align*}
+We also assume the traffic conservation equation holds \ie~$\sum_{i=1}^M r_i = \sum_{j=1}^N c_j$. This translates to an additional constraint
+\begin{align*}
+\sum_{i=1}^M x_{i,j}  \sum_{j=1}^N x_{i,j} &= T,
+\end{align*}
+where $T$ is the total traffic in the measurement interval.
+
+Bitmaps are used to measure incoming traffic at ingress routers and outgoing traffic at egress routers, constituting end-to-end measurements.
+Let the set of ingress bitmaps be denoted by $\cA = \{ A_1, A_2, \cdots, A_M\}$, while the set of egress bitmaps is denoted by $\cD = \{D_1,
+D_2,\cdots, D_N\}$. All bitmaps have the same size of $B$ bits. 
+
+Let $u_{S}$ denote the number of zero bits in bitmap $S$, while $u^c_{S}$ denotes its complement, \ie~the number of non-zero bits in bitmap 
+$S$. Clearly, $u^c_{S} = B- u_{S}$. Let $\lambda_i = (\sum_{j=1}^N x_{i,j})/B$, the load factor for bitmap $A_i$, while 
+$\mu_j = (\sum_{i=1}^M x_{i,j})/B$, the load factor for bitmap $D_j$. Let $\cU$ be the set containing all the observations $u_{S}$ for each bitmap 
+$S \in \cA, \cD$ once the measurement interval is over.
  
-\appendix
+ Assuming $B$ is large enough so that a Poisson approximation holds, the log-likelihood equation can thus be written as
+\be
+L(\bX ; \cU) = \sum_{i=1}^M u_{A_i} \log e^{-\lambda_i} + \sum_{i=1}^M u^c_{A_i} \log (1-e^{-\lambda_i}) + \sum_{j=1}^N u_{D_j} \log e^{-\mu_j} + \sum_{j=1}^N u^c_{D_j} \log (1-e^{-\mu_j}).
+\label{eq:likelihood}
+\ee
+To solve this subject to the constraints stated above, including the implicit non-negative constraint on $\bX$, we define the Lagrangian
+\begin{align}
+\label{eq:lagrangian}
+\cL(\bX; \cU, \bgamma, \bpsi, \phi, \bZ) &= L(\bX ; \cU) - \sum_{i=1}^M \gamma_i \Big(\sum_{j=1}^N x_{i,j} - r_i\Big) - \sum_{j=1}^N \psi_j 
+\Big(\sum_{i=1}^M x_{i,j} - c_j\Big) \\
+\nonumber
+&\hspace{1cm} -\phi \Big( \sum_{i,j} x_{i,j} - T\Big) - \sum_{i,j} z_{i,j} x_{i,j},
+\end{align}
+where $\gamma_i, \psi_j, \phi \in \Real$ and $z_{i,j} \ge 0$. 
+
+Differentiating the Lagrangian with respect to $\bX$ and the multipliers we get
+\begin{align}
+\label{eq:multipliers}
+\frac{\partial \cL(\bX; \cU, \bgamma, \bpsi, \phi, \bZ)}{\partial x_{i,j}}  &= \frac{\partial}{\partial x_{i,j}} L(\bX ; \cU) - \gamma_i - \psi_j - \phi -z_{i,j},\ \forall i,j \\
+\label{eq:row}
+\frac{\partial \cL(\bX; \cU, \bgamma, \bpsi, \phi, \bZ)}{\partial \gamma_i}  & = \sum_{j=1}^N x_{i,j} - r_i,\ \forall i\\
+\label{eq:column}
+\frac{\partial \cL(\bX; \cU, \bgamma, \bpsi, \phi, \bZ)}{\partial \psi_j} & = \sum_{i=1}^M x_{i,j} - c_j, \forall j\\
+\label{eq:total}
+\frac{\partial \cL(\bX; \cU, \bgamma, \bpsi, \phi, \bZ)}{\partial z_{i,j}} & = \sum_{i,j} x_{i,j} - T\\
+\label{eq:nonneg}
+\frac{\partial \cL(\bX; \cU, \bgamma, \bpsi, \phi, \bZ)}{\partial z_{i,j}} & = x_{i,j},\ \forall i,j,
+\end{align}
+where
+\be
+\frac{\partial}{\partial x_{i,j}} L(\bX ; \cU) = - \frac{u_{A_i}}{B} - \frac{u_{D_j}}{B} + \frac{1}{B} \frac{u^c_{A_i} e^{-\lambda_i}}{1-e^{-\lambda_i}}
++ \frac{1}{B} \frac{u^c_{D_j} e^{-\mu_j}}{1-e^{-\mu_j}}.
+\label{eq:diff_likelihood}
+\ee
+To solve for the MLE, we set all the above equations to 0. The equations \autoref{eq:row}, \autoref{eq:column}, \autoref{eq:total} and 
+\autoref{eq:nonneg} are trivial because they derive the constraints or find the trivial solution $x_{i,j} = 0, \forall i,j$. 
+
+Henceforth, we only need to consider equation \autoref{eq:multipliers}. We get
+\begin{align}
+\nonumber
+- \frac{u_{A_i}}{B} - \frac{u_{D_j}}{B} + \frac{1}{B} \frac{u^c_{A_i} e^{-\lambda_i}}{1-e^{-\lambda_i}} + \frac{1}{B} \frac{u^c_{D_j} e^{-\mu_j}}{1-e^{-
+\mu_j}} &= \gamma_i + \psi_j +\phi +  z_{i,j}\\
+\nonumber
+- \frac{u_{A_i}}{B} - \frac{u_{D_j}}{B} + \frac{1}{B} \frac{u^c_{A_i}}{1-e^{-\lambda_i}}  - \frac{u^c_{A_i}}{B} + \frac{1}{B}  \frac{u^c_{D_j} }{1-e^{-\mu_j}} - \frac{u^c_{D_j}}{B}
+&= \gamma_i + \psi_j + \phi+ z_{i,j}\\
+\label{eq:mult_solve}
+\frac{1}{B} \frac{u^c_{A_i} }{1-e^{-\lambda_i}} + \frac{1}{B} \frac{u^c_{D_j} }{1-e^{-\mu_j}} &= 2 + \gamma_i + \psi_j +  \phi + z_{i,j},
+\end{align}
+since $u^c_{S} = B - u_{S}$. We can omit $z_{i,j}$ by assuming that the optimal solution does not lie on the boundary, \ie~the MLE is contained 
+within the non-negative matrix plane, so $z_{i,j} = 0$ $\forall i,j$. Recall at this point $\lambda_i$ and $\mu_j$ do not necessarily obey the row 
+and column sum constraints. To solve for $\gamma_i$, $\psi_j$ and $\phi$, we use the row and column sum constraints to get
+\ben
+\gamma_i + \psi_j + \phi =\frac{1}{B} \frac{u^c_{A_i} }{1-e^{-r_i/B}} + \frac{1}{B} \frac{u^c_{D_j} }{1-e^{-c_j/B}} - 2,\ \forall i,j.
+\een
+Putting this back into \autoref{eq:mult_solve}, we have
+\be
+ \frac{u^c_{A_i} }{1-e^{-(\sum_{j=1}^N \hat{x}_{i,j})/B}} + \frac{u^c_{D_j} }{1-e^{-(\sum_{i=1}^M \hat{x}_{i,j})/B}} = \frac{u^c_{A_i} }{1-e^{-r_i/B}} + \frac{u^c_{D_j} }{1-e^{-c_j/B}}.
+ \label{eq:mle}
+\ee
+By expanding the left hand side, one can rewrite \autoref{eq:mle} as a fixed point map to iteratively solve for $\bX$ until a convergence
+criterion is met.
+
+\medskip
+\noindent
+\textbf{No constraints}. 
+Let us assume for a moment that there are no constraints on $\bX$ (equivalent to the case $\gamma_i$, $\psi_j$, $\phi$ and $z_{i,j}$ are zero). 
+We only need to concentrated on finding the zero of \autoref{eq:diff_likelihood}, so
+\begin{align*}
+\frac{u^c_{A_i} e^{-\lambda_i}}{1-e^{-\lambda_i}} + \frac{u^c_{D_j} e^{-\mu_j}}{1-e^{-\mu_j}} &= u_{A_i} + u_{D_j}\\
+\frac{u^c_{A_i}}{1-e^{-\lambda_i}}  - u^c_{A_i}+ \frac{u^c_{D_j} }{1-e^{-\mu_j}} - u^c_{D_j}  &=  u_{A_i} + u_{D_j}\\
+\frac{u^c_{A_i}}{1-e^{-\lambda_i}}  + \frac{u^c_{D_j} }{1-e^{-\mu_j}} &= 2B\\
+u^c_{A_i} (1-e^{-\mu_j}) + u^c_{D_j} (1-e^{-\lambda_i}) &= 2B(1-e^{-\lambda_i})(1-e^{-\mu_j})
+\end{align*}
+By expanding the right hand side, noting that $u^c_{S} = B - u_{S}$ and with a little more algebraic simplification, we get
+\begin{align*}
+2B e^{-(\lambda_i + \mu_j)} &= (B+u_{A_i}) e^{-\mu_j} + (B+u_{D_j}) e^{-\lambda_i} - (u_{A_i} + u_{D_j})\\
+\lambda_i + \mu_j &= \log\left( \frac{2B}{(B+u_{A_i}) e^{-\mu_j} + (B+u_{D_j}) e^{-\lambda_i} - (u_{A_i} + u_{D_j}) }\right)\\
+\frac{1}{B} \sum_{j=1}^N x_{i,j} + \frac{1}{B} \sum_{i=1}^M x_{i,j} & = \log\left( \frac{2B}{(B+u_{A_i}) e^{-\mu_j} + (B+u_{D_j}) e^{-\lambda_i} - (u_
+{A_i} + u_{D_j}) }\right)
+\end{align*}
+From the final line, we get the MLE:
+\be
+\hat{x}_{i,j} = \frac{B}{2} \log\left( \frac{2B}{(B+u_{A_i}) e^{-\hat{\mu}_j} + (B+u_{D_j}) e^{-\hat{\lambda}_i} - (u_{A_i} + u_{D_j}) }\right) - \sum_{k 
+\ne i} \hat{x}_{k,j} - \sum_{\ell \ne j} \hat{x}_{i,\ell}.
+\label{eq:mle_unconstrained}
+\ee
+This forms a fixed point equation, where we start from an initial point and iterate until a convergence criterion is achieved. 
+
+The interpretation in this case is simple:
+\ben
+B \log\left( \frac{2B}{(B+u_{A_i}) e^{-\mu_j} + (B+u_{D_j}) e^{-\lambda_i} - (u_{A_i} + u_{D_j}) }\right)
+\een
+is an estimate of $r_i + c_j$, then a division by 2 removes double counting of $x_{i,j}$ and finally, all contributions from other
+entries belonging to the same row and column as $x_{i,j}$ are removed. The downside of the MLE is that one would have to compute the 
+entire TM, even if one is just interested in a single entry of $\bX$.
+
+\section{Unconstrained Fisher Information}
+
+If we take the expectation of \autoref{eq:diff_likelihood}, we get
+\begin{align*}
+\E{\frac{\partial}{\partial x_{i,j}} L(\bX ; \cU)} &= - \frac{\E{u_{A_i}}}{B} - \frac{\E{u_{D_j}}}{B} + \frac{1}{B} \frac{\E{u^c_{A_i}} e^{-\lambda_i}}{1-e^{-\lambda_i}}
++ \frac{1}{B} \frac{\E{u^c_{D_j}} e^{-\mu_j}}{1-e^{-\mu_j}}\\
+&= - e^{-\lambda_i} - e^{-\mu_j} + e^{-\lambda_i} + e^{-\mu_j} \\
+&= 0,
+\end{align*}
+since $\E{u_{A_i}} = Be^{-\lambda_i}$, $\E{u^c_{A_i}} = B(1-e^{-\lambda_i})$, $\E{u_{D_j}} = Be^{-\mu_j}$ and $\E{u^c_{D_j}} 
+= B(1-e^{-\mu_j})$. Since this regularity condition is satisfied, we can use the second order derivative to derive the Fisher information. We have
+\ben
+\frac{\partial^2}{\partial x_{i,j}\partial x_{k,\ell}} L(\bX ; \cU) =
+\begin{cases}
+-\frac{1}{B^2} \frac{u^c_{A_i} e^{-\lambda_i}}{(1-e^{-\lambda_i})^2} - \frac{1}{B^2} \frac{u^c_{D_j} e^{-\mu_j}}{(1-e^{-\mu_j})^2}, & i=k, j=\ell,\\
+-\frac{1}{B^2} \frac{u^c_{A_i} e^{-\lambda_i}}{(1-e^{-\lambda_i})^2}, & i=k, j \ne \ell,\\
+-\frac{1}{B^2} \frac{u^c_{D_j} e^{-\mu_j}}{(1-e^{-\mu_j})^2}, & i \ne k, j = \ell,\\
+0, & i\ne k, j\ne \ell.
+\end{cases}
+\een
+The Fisher information is then
+\be
+-\E{\frac{\partial^2}{\partial x_{i,j}\partial x_{k,\ell}} L(\bX ; \cU) } =
+\begin{cases}
+\frac{1}{B} \frac{e^{-\lambda_i}}{1-e^{-\lambda_i}} + \frac{1}{B} \frac{e^{-\mu_j}}{1-e^{-\mu_j}}, & i=k, j=\ell,\\
+\frac{1}{B} \frac{e^{-\lambda_i}}{1-e^{-\lambda_i}}, & i=k, j \ne \ell,\\
+\frac{1}{B} \frac{ e^{-\mu_j}}{1-e^{-\mu_j}}, & i \ne k, j = \ell,\\
+0, & i\ne k, j\ne \ell.
+\end{cases}
+\label{eq:fim_no_constraints}
+\ee
+Note that the Fisher information matrix $\bJ(\bX)$ here is symmetric and of size $MN \times MN$. The inverse of $\bJ(\bX)$ gives us the
+unconstrained Cram\'er-Rao bound, which is the lower bound on the variance of the MLE \autoref{eq:mle_unconstrained}.
+
+\section{Constrained Cram\'er-Rao Bound}
+
+The Fisher information matrix $\bJ(\bX)$ does not take into account constraints on $\bX$. From \cite{Gorman90CRB}, only equality constraints 
+increase the Fisher information. Thus, the row, column and total sum constraints affect the Fisher information (and therefore the Cram\'er-Rao 
+bound), but not the non-negativity inequality constraints.
+
+Let $\bG$ be the $M+N+1$ by $MN$ constraint gradient of the row and column sum constraints. The row, column and total sum constraints can 
+be expressed in terms of a function $g(\bX)$. As an example, consider a 2 by 2 TM. The row, column and total sum constraints are
+\begin{align*}
+x_{1,1} + x_{1,2} &= r_1\\
+x_{2,1} + x_{2,2} &= r_2\\
+x_{1,1} + x_{2,1} &= c_1\\
+x_{1,2} + x_{2,2} &= c_2\\
+x_{1,1} + x_{1,2} + x_{2,1} + x_{2,2} &= T,
+\end{align*}
+where $T$ is the total traffic. The constraint gradient is
+\ben
+\bG =
+\begin{bmatrix}
+\frac{\partial}{\partial x_{1,1}} g(\bX) & \frac{\partial}{\partial x_{1,2}} g(\bX) & \frac{\partial}{\partial x_{2,1}} g(\bX)
+ & \frac{\partial}{\partial x_{2,2}} g(\bX)
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 1 & 0 & 0\\
+0 & 0 & 1 & 1\\
+1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1\\
+1 & 1 & 1 & 1
+\end{bmatrix}.
+\een
+
+In general, 
+\ben
+\bG =
+\begin{bmatrix}
+\frac{\partial}{\partial x_{1,1}} g(\bX) & \frac{\partial}{\partial x_{1,2}} g(\bX) & \cdots
+ & \frac{\partial}{\partial x_{M,N}} g(\bX)
+\end{bmatrix}
+\een
+Then, by the result in \cite{Gorman90CRB}, the constrained Cram\'er-Rao bound is given by
+\ben
+\cI^+(\bX) = \bJ^{-1} (\bX) - \bJ^{-1} (\bX) \bG^\T \Big(\bG \bJ^{-1} (\bX) \bG^\T \Big)^{-1} \bG \bJ^{-1} (\bX).
+\een 
 
 \bibliography{TuneBib}
 \bibliographystyle{abbrv}
